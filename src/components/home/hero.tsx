@@ -15,12 +15,17 @@ export function Hero() {
     <section className="relative isolate flex min-h-[92svh] items-end overflow-hidden pt-[4.5rem]">
       {/* Backdrop */}
       <Image
-        src="/brand/hero.jpg"
+        src="/brand/hero-shop-lineup.jpg"
         alt=""
         fill
         priority
         sizes="100vw"
         quality={82}
+        // NOTE: give a replacement hero a NEW filename rather than overwriting
+        // this one. next/image keys its optimised URL on the path, so an
+        // overwrite leaves browsers and the Vercel CDN serving the old picture
+        // from cache — which is exactly what happened during this build.
+        //
         // ⛔ TEMPORARY hero. Two problems before this can ship:
         //   1. Source is 596x335 — upscaled 2x here, still soft full-bleed.
         //      Needs the original file.
@@ -29,11 +34,22 @@ export function Hero() {
         // Fallback available at /brand/hero-bronco.jpg.
         className="-z-20 object-cover object-[center_56%]"
       />
+      {/*
+        Scrim is bottom-weighted and clears entirely by ~70% height. The hero
+        photo is a night shot that is already 62% near-black, so the previous
+        full-frame wash (40% at the top rising to solid) erased it. Darkness is
+        only needed where the copy actually sits.
+      */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/75 to-ink/40"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-ink from-[6%] via-ink/62 via-[34%] to-transparent to-[72%]"
       />
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-[0.35]" />
+      {/* Extra reach under the headline on wide viewports, where copy is left-aligned */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/75 via-ink/20 to-transparent lg:via-[38%]"
+      />
+      <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-[0.18]" />
       <div aria-hidden className="grain-layer -z-10" />
 
       <Container wide className="relative pb-14 pt-24 sm:pb-20">
