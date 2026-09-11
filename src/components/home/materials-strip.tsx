@@ -1,49 +1,37 @@
 import { materials } from "@/config/process";
 import { Container } from "../ui/container";
 import { SectionHead } from "../ui/section-head";
-import { Reveal } from "../ui/reveal";
 
+/**
+ * Dark again, and typographic rather than carded — the brand names are the
+ * visual. Nothing here needs a box drawn around it.
+ */
 export function MaterialsStrip() {
   return (
-    <section className="border-b border-line bg-ink-soft py-24 sm:py-32">
+    <section className="bay border-t border-hairline py-24 sm:py-32">
       <Container>
         <SectionHead
-          index="04"
-          eyebrow="Materials"
-          title={
-            <>
-              Three film houses,
-              <br />
-              chosen per car
-            </>
-          }
-          lede="We are not tied to one supplier. The right film depends on the finish you are after and how sculpted the bodywork is — and we will show you physical samples in daylight before you commit."
+          title="Three film houses, chosen per car"
+          lede="We are not tied to one supplier. The right film depends on the finish you want and how sculpted the bodywork is — and you will see physical samples on your own paint, in daylight, before committing."
         />
 
-        <ul className="mt-16 grid gap-px border border-line bg-line lg:grid-cols-3">
-          {materials.map((material, i) => (
-            <Reveal as="li" key={material.brand} delay={i * 80} className="flex flex-col bg-ink-soft p-8 sm:p-10">
-              <p className="eyebrow">{material.positioning}</p>
-              <h3 className="mt-5 font-display text-3xl font-extrabold uppercase text-chalk">
-                {material.brand}
-              </h3>
-              <p className="mt-2 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-accent">
-                {material.line}
-              </p>
-              <p className="mt-6 flex-1 text-sm leading-relaxed text-fog">{material.body}</p>
-              <dl className="mt-8 space-y-3 border-t border-line pt-6 text-sm">
-                <div>
-                  <dt className="eyebrow">Best for</dt>
-                  <dd className="mt-1.5 text-fog">{material.bestFor}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow">Warranty</dt>
-                  <dd className="mt-1.5 text-fog">{material.warranty}</dd>
-                </div>
-              </dl>
-            </Reveal>
+        <dl className="mt-16 divide-y divide-hairline border-y border-hairline">
+          {materials.map((material) => (
+            <div key={material.brand} className="grid gap-6 py-10 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16">
+              <dt>
+                <span className="block text-4xl text-chalk sm:text-5xl">{material.brand}</span>
+                <span className="mt-3 block text-sm text-cyan">{material.line}</span>
+              </dt>
+              <dd>
+                <p className="max-w-[62ch] leading-relaxed text-fog">{material.body}</p>
+                <p className="mt-5 max-w-[62ch] text-sm leading-relaxed text-fog-dim">
+                  <span className="text-fog">Best for</span> {material.bestFor}{" "}
+                  <span className="text-fog">Warranty</span> {material.warranty}
+                </p>
+              </dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       </Container>
     </section>
   );

@@ -1,36 +1,56 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "./ui/container";
 
+/**
+ * Interior pages open dark and quiet, so the light sections below them land.
+ * An optional photograph drifts behind on scroll where the page has one.
+ */
 export function PageHero({
-  index,
   eyebrow,
   title,
   lede,
   breadcrumbs,
+  image,
   children,
 }: {
-  index?: string;
-  eyebrow: string;
+  /** Only pass this when it carries information the headline does not. */
+  eyebrow?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
   breadcrumbs?: { name: string; path: string }[];
+  image?: { src: string; blurDataURL: string } | null;
   children?: React.ReactNode;
 }) {
   return (
-    <section className="relative isolate overflow-hidden border-b border-line pt-[4.5rem]">
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-30" />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-surface/70 via-ink to-ink"
-      />
+    <section className="bay relative isolate overflow-hidden border-b border-hairline pt-[4.5rem]">
+      {image && (
+        <>
+          <div className="absolute inset-0 -z-20 overflow-hidden">
+            <Image
+              src={image.src}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              quality={80}
+              placeholder="blur"
+              blurDataURL={image.blurDataURL}
+              className="drift-slow object-cover"
+            />
+          </div>
+          <div aria-hidden className="absolute inset-0 -z-10 bg-ink/78" />
+        </>
+      )}
+      <div aria-hidden className="grain-layer -z-10" />
 
-      <Container className="py-20 sm:py-28">
+      <Container className="relative py-20 sm:py-28">
         {breadcrumbs && breadcrumbs.length > 1 && (
           <nav aria-label="Breadcrumb" className="mb-10">
-            <ol className="flex flex-wrap items-center gap-2 font-mono text-[0.64rem] uppercase tracking-[0.14em] text-fog-dim">
+            <ol className="flex flex-wrap items-center gap-2 text-sm text-fog-dim">
               {breadcrumbs.map((crumb, i) => (
                 <li key={crumb.path} className="flex items-center gap-2">
-                  {i > 0 && <span aria-hidden className="text-line-bright">/</span>}
+                  {i > 0 && <span aria-hidden className="text-hairline-strong">/</span>}
                   {i === breadcrumbs.length - 1 ? (
                     <span aria-current="page" className="text-fog">{crumb.name}</span>
                   ) : (
@@ -44,17 +64,11 @@ export function PageHero({
           </nav>
         )}
 
-        <div className="flex items-center gap-4">
-          {index && <span className="font-mono text-[0.7rem] tabular text-accent">{index}</span>}
-          <span className="hatch h-3 w-12" aria-hidden />
-          <p className="eyebrow">{eyebrow}</p>
-        </div>
+        {eyebrow && <p className="mb-5 text-sm text-cyan">{eyebrow}</p>}
 
-        <h1 className="mt-8 max-w-[16ch] font-display text-hero font-extrabold uppercase text-chalk">
-          {title}
-        </h1>
+        <h1 className="max-w-[17ch] text-hero text-chalk">{title}</h1>
 
-        {lede && <p className="mt-8 max-w-2xl text-lg leading-relaxed text-fog sm:text-xl">{lede}</p>}
+        {lede && <p className="mt-7 max-w-[60ch] text-lede text-fog">{lede}</p>}
 
         {children}
       </Container>

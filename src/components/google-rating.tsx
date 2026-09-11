@@ -23,15 +23,15 @@ export function GoogleRating({ className, compact = false }: { className?: strin
   const inner = (
     <>
       <span className="relative inline-block leading-none" aria-hidden>
-        <span className="text-line-bright">{stars}</span>
+        <span className="text-hairline-strong">{stars}</span>
         <span
-          className="absolute inset-0 overflow-hidden text-accent"
+          className="absolute inset-0 overflow-hidden text-cyan"
           style={{ width: `${filled}%` }}
         >
           {stars}
         </span>
       </span>
-      <span className="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fog">
+      <span className="text-sm text-fog">
         <span className="tabular text-chalk">{rating.toFixed(1)}</span>
         {" · "}
         {count} {source} review{count === 1 ? "" : "s"}
@@ -57,14 +57,11 @@ export function GoogleRating({ className, compact = false }: { className?: strin
       aria-label={`${label}. Opens Google in a new tab.`}
       className={cn(
         "group inline-flex items-center gap-3 transition-colors hover:text-chalk",
-        compact ? "" : "border border-line px-4 py-3 hover:border-line-bright",
+        compact ? "" : "border border-hairline px-4 py-3 hover:border-hairline-strong",
         className,
       )}
     >
       {inner}
-      <span aria-hidden className="text-fog-dim transition-transform duration-200 group-hover:translate-x-0.5">
-        →
-      </span>
     </a>
   );
 }

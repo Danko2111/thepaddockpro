@@ -3,7 +3,6 @@ import { PageHero } from "@/components/page-hero";
 import { FaqList } from "@/components/faq-list";
 import { CtaBand } from "@/components/cta-band";
 import { Container } from "@/components/ui/container";
-import { Reveal } from "@/components/ui/reveal";
 import { site } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
 import { JsonLd, articleSchema, breadcrumbSchema, faqSchema } from "@/lib/schema";
@@ -92,22 +91,16 @@ export default function CostGuidePage() {
   return (
     <>
       <PageHero
-        eyebrow="Guide · Updated September 2026"
+        eyebrow="Updated September 2026"
         breadcrumbs={trail}
-        title={
-          <>
-            What a wrap
-            <br />
-            actually costs
-          </>
-        }
+        title="What a wrap actually costs"
         lede="We do not publish a price list, and you should be skeptical of shops that do. Here is what genuinely moves the number, so you can read any quote — ours or anyone else's — and know what you are looking at."
       />
 
       {/* Why no price list */}
-      <section className="border-b border-line py-20 sm:py-24">
+      <section className="concrete py-20 sm:py-24">
         <Container>
-          <div className="max-w-3xl space-y-6 text-lg leading-relaxed text-fog">
+          <div className="max-w-[64ch] space-y-6 text-lede text-slate">
             <p>
               Every wrap shop gets the same first question, and most answer it with a number that turns out
               to be wrong. The honest answer is that two cars sitting side by side in the same bay, both
@@ -120,7 +113,7 @@ export default function CostGuidePage() {
               the difference gets recovered by cutting corners you will not see until the film starts
               lifting. Neither is a good deal.
             </p>
-            <p className="text-chalk">
+            <p className="text-graphite">
               So instead, here are the five variables. Understand these and you can read any quote you are
               handed.
             </p>
@@ -129,73 +122,53 @@ export default function CostGuidePage() {
       </section>
 
       {/* Factors */}
-      <section className="border-b border-line bg-ink-soft py-24 sm:py-32">
+      <section className="concrete border-t border-hairline-light py-24 sm:py-32">
         <Container>
-          <div className="flex items-center gap-4">
-            <span className="hatch h-3 w-12" aria-hidden />
-            <p className="eyebrow">What moves the price</p>
-          </div>
+          <h2 className="text-section text-graphite">What moves the price</h2>
 
-          <ol className="mt-12 border-t border-line">
-            {FACTORS.map((factor, i) => (
-              <Reveal as="li" key={factor.index} delay={i * 50}>
-                <article className="grid gap-8 border-b border-line py-12 lg:grid-cols-[5rem_1fr_18rem] lg:gap-12">
-                  <span className="font-display text-4xl font-extrabold tabular leading-none text-accent">
-                    {factor.index}
-                  </span>
+          <ul className="mt-12 border-t border-hairline-light">
+            {FACTORS.map((factor) => (
+              <li key={factor.index}>
+                <article className="grid gap-8 border-b border-hairline-light py-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16">
                   <div>
-                    <h2 className="font-display text-2xl font-extrabold uppercase text-chalk sm:text-3xl">
-                      {factor.title}
-                    </h2>
-                    <p className="mt-5 max-w-2xl leading-relaxed text-fog">{factor.body}</p>
+                    <h3 className="text-2xl text-graphite sm:text-3xl">{factor.title}</h3>
+                    <p className="mt-5 max-w-[58ch] leading-relaxed text-slate">{factor.body}</p>
                   </div>
-                  <ul className="space-y-2.5 border-t border-line pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+                  <ul className="space-y-2 text-sm text-slate-dim lg:pt-2">
                     {factor.examples.map((example) => (
-                      <li key={example} className="flex items-start gap-3 text-sm text-fog-dim">
-                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 bg-accent" aria-hidden />
-                        {example}
-                      </li>
+                      <li key={example}>{example}</li>
                     ))}
                   </ul>
                 </article>
-              </Reveal>
+              </li>
             ))}
-          </ol>
+          </ul>
         </Container>
       </section>
 
       {/* Red flags */}
-      <section className="border-b border-line py-24 sm:py-32">
+      <section className="bay border-t border-hairline py-24 sm:py-32">
         <Container>
-          <div className="flex items-center gap-4">
-            <span className="hatch h-3 w-12" aria-hidden />
-            <p className="eyebrow">Reading a quote</p>
-          </div>
-          <h2 className="mt-8 max-w-[18ch] font-display text-section font-extrabold uppercase text-chalk">
+          <h2 className="max-w-[18ch] text-section text-chalk">
             Six reasons a quote is too cheap
           </h2>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-fog">
+          <p className="mt-6 max-w-[58ch] text-lede text-fog">
             Price differences between shops are real and often justified. These are the ones that are not.
           </p>
 
-          <ul className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-            {RED_FLAGS.map((item, i) => (
-              <Reveal as="li" key={item.flag} delay={i * 45} className="bg-ink p-8">
-                <span className="font-mono text-[0.65rem] tabular text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-4 font-display text-lg font-bold uppercase leading-tight text-chalk">
-                  {item.flag}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-fog">{item.why}</p>
-              </Reveal>
+          <dl className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {RED_FLAGS.map((item) => (
+              <div key={item.flag}>
+                <dt className="text-lg leading-snug text-chalk">{item.flag}</dt>
+                <dd className="mt-3 leading-relaxed text-fog">{item.why}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
 
-          <p className="mt-12 max-w-2xl leading-relaxed text-fog">
+          <p className="mt-14 max-w-[58ch] leading-relaxed text-fog">
             Our own quotes name the film manufacturer and series, list which panels come off, state the shop
             time and say what happens if we find something under the trim.{" "}
-            <Link href="/process" className="text-chalk underline decoration-accent underline-offset-4 hover:text-accent">
+            <Link href="/process" className="text-chalk underline decoration-cyan underline-offset-4 hover:text-cyan">
               The full process is here
             </Link>
             .
@@ -203,10 +176,9 @@ export default function CostGuidePage() {
         </Container>
       </section>
 
-      <FaqList faqs={FAQS} eyebrow="Cost questions" title="What else people ask" />
+      <FaqList faqs={FAQS} title="What else people ask" />
 
       <CtaBand
-        eyebrow="Get a real number"
         title="Same-day range, no obligation"
         body="Send the vehicle, the coverage and a few photos. You get a realistic range back the same day and a fixed price once we have seen the car."
       />

@@ -59,7 +59,7 @@ export function GalleryGrid({
   return (
     <>
       {/* Filters */}
-      <div className="flex flex-wrap gap-2 border-y border-line py-4" role="group" aria-label="Filter work by service">
+      <div className="flex flex-wrap gap-2 border-y border-hairline py-4" role="group" aria-label="Filter work by service">
         {categories.map((category) => {
           const isActive = active === category.key;
           return (
@@ -69,14 +69,14 @@ export function GalleryGrid({
               onClick={() => setActive(category.key)}
               aria-pressed={isActive}
               className={cn(
-                "flex items-center gap-2.5 border px-4 py-2.5 font-mono text-[0.68rem] uppercase tracking-[0.14em] transition-colors",
+                "flex items-center gap-2.5 border px-4 py-2.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "border-accent bg-accent text-accent-ink"
-                  : "border-line text-fog hover:border-line-bright hover:text-chalk",
+                  ? "border-cyan bg-cyan text-cyan-ink"
+                  : "border-hairline text-fog hover:border-hairline-strong hover:text-chalk",
               )}
             >
               {category.label}
-              <span className={cn("tabular text-[0.6rem]", isActive ? "text-accent-ink/70" : "text-fog-dim")}>
+              <span className={cn("tabular text-xs", isActive ? "text-cyan-ink/70" : "text-fog-dim")}>
                 {category.count}
               </span>
             </button>
@@ -97,7 +97,7 @@ export function GalleryGrid({
               <button
                 type="button"
                 onClick={() => setLightbox(i)}
-                className="group relative block w-full overflow-hidden bg-surface text-left"
+                className="group relative block w-full overflow-hidden bg-steel text-left"
               >
                 <Image
                   src={image.src}
@@ -114,7 +114,7 @@ export function GalleryGrid({
                   className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-95"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <span className="font-display text-lg font-bold uppercase leading-tight text-chalk">
+                  <span className="text-lg leading-tight text-chalk">
                     {image.title}
                   </span>
                   {image.caption && (
@@ -140,16 +140,16 @@ export function GalleryGrid({
           className="fixed inset-0 z-[60] flex flex-col bg-ink/97 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
-          <div className="flex items-center justify-between border-b border-line px-5 py-4">
-            <p className="font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fog">
-              <span className="text-accent">{String(visible.findIndex((v) => v.i === lightbox) + 1).padStart(2, "0")}</span>
+          <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
+            <p className="text-sm text-fog">
+              <span className="text-cyan">{String(visible.findIndex((v) => v.i === lightbox) + 1).padStart(2, "0")}</span>
               {" / "}
               {String(visible.length).padStart(2, "0")}
             </p>
             <button
               type="button"
               onClick={() => setLightbox(null)}
-              className="border border-line px-4 py-2 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-chalk transition-colors hover:border-accent hover:text-accent"
+              className="border border-hairline px-4 py-2 text-sm text-chalk transition-colors hover:border-cyan hover:text-cyan"
             >
               Close ✕
             </button>
@@ -171,24 +171,24 @@ export function GalleryGrid({
           </div>
 
           <div
-            className="flex items-center justify-between gap-4 border-t border-line px-5 py-4"
+            className="flex items-center justify-between gap-4 border-t border-hairline px-5 py-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => step(-1)}
-              className="px-3 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fog transition-colors hover:text-chalk"
+              className="px-3 py-2 text-sm text-fog transition-colors hover:text-chalk"
             >
               ← Prev
             </button>
             <div className="min-w-0 text-center">
-              <p className="truncate font-display text-base font-bold uppercase text-chalk">{current.title}</p>
+              <p className="truncate text-base text-chalk">{current.title}</p>
               {current.caption && <p className="truncate text-xs text-fog">{current.caption}</p>}
             </div>
             <button
               type="button"
               onClick={() => step(1)}
-              className="px-3 py-2 font-mono text-[0.68rem] uppercase tracking-[0.14em] text-fog transition-colors hover:text-chalk"
+              className="px-3 py-2 text-sm text-fog transition-colors hover:text-chalk"
             >
               Next →
             </button>

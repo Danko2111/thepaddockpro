@@ -1,56 +1,56 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   THE PADDOCK PRO — DESIGN TOKENS
-   Dark, motorsport-paddock direction. One hot accent, everything else is
-   carbon greys and hairlines. Change --color-accent to re-skin the whole site.
+   PADDOCK PRO — THE LIT BAY
+   Every photo this shop takes is the same idea: a dark garage where the car is
+   the only bright thing. So light is the structural device here. Sections that
+   carry imagery go dark and full-bleed; sections that carry information go
+   light and contained. The alternation is the layout.
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @theme {
-  /* Surfaces — near-black, warmed very slightly so it doesn't read as #000 */
-  --color-ink: #08080a;
-  --color-ink-soft: #0d0d11;
-  --color-surface: #131318;
-  --color-surface-2: #1b1b22;
+  /* ── Dark half: the bay ─────────────────────────────────────────────── */
+  --color-ink: #07070a;
+  --color-asphalt: #0d0e13;
+  --color-steel: #1b1d26;
+  --color-hairline: #23262f;
+  --color-hairline-strong: #3a3e4c;
+  --color-steel-2: #262935;
+  --color-chalk: #f4f5f7;
+  --color-fog: #8e92a0;
+  --color-fog-dim: #757b8c;   /* 4.8:1 on ink */
 
-  /* Hairlines */
-  --color-line: #24242e;
-  --color-line-bright: #38384a;
+  /* ── Light half: polished concrete. Cool grey, deliberately not cream. ── */
+  --color-paper: #e9eaec;
+  --color-paper-raised: #f5f6f7;
+  --color-hairline-light: #cfd2d7;
+  --color-graphite: #14161b;
+  --color-slate: #4a505c;     /* 6.7:1 on paper */
+  --color-slate-dim: #5f6674; /* 4.8:1 on paper */
 
-  /* Type */
-  --color-chalk: #f5f5f7;
-  --color-fog: #8b8b9a;
-  --color-fog-dim: #5e5e6c;
+  /* ── Accent: sampled from the logo. Locked. ─────────────────────────── */
+  --color-cyan: #22b4e8;
+  --color-cyan-hot: #54c7f2;
+  /* On paper, #22b4e8 is 2.4:1 and unreadable. This is 6.4:1. */
+  --color-cyan-deep: #1460a9;
+  /* On a cyan fill, white is 2.4:1. This is 7.6:1. */
+  --color-cyan-ink: #04161e;
 
-  /* Accent — the electric cyan sampled from the Paddock Pro logo. The only
-     saturated colour in the system; change this token to re-skin the site. */
-  --color-accent: #22b4e8;
-  --color-accent-hot: #54c7f2;
-  --color-accent-dim: #116b8e;
-
-  /* Deeper logo blue, for gradients and hover grounds. */
-  --color-accent-deep: #1460a9;
-
-  /* Text on an accent-filled surface. Cyan is too light to carry white text —
-     white on #22b4e8 is 2.4:1 and fails WCAG AA. This pairing is 7.6:1. */
-  --color-accent-ink: #04161e;
-
+  /* Archivo carries a width axis; we run it wide, not condensed. Condensed is
+     the motorsport default — wide and heavy is what's painted on their wall. */
   --font-display: var(--font-display), "Archivo", ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, "SF Mono", monospace;
 
-  /* Editorial display scale — clamped so it never needs breakpoint overrides */
-  --text-display: clamp(2.75rem, 9vw, 8rem);
-  --text-display--line-height: 0.88;
-  --text-display--letter-spacing: -0.035em;
-
-  --text-hero: clamp(2.25rem, 6.5vw, 5.5rem);
-  --text-hero--line-height: 0.9;
+  --text-hero: clamp(2.5rem, 7.5vw, 6.5rem);
+  --text-hero--line-height: 0.94;
   --text-hero--letter-spacing: -0.03em;
 
-  --text-section: clamp(1.875rem, 4.2vw, 3.5rem);
-  --text-section--line-height: 0.95;
-  --text-section--letter-spacing: -0.025em;
+  --text-section: clamp(1.75rem, 3.6vw, 3.25rem);
+  --text-section--line-height: 1.02;
+  --text-section--letter-spacing: -0.022em;
+
+  --text-lede: clamp(1.0625rem, 1.5vw, 1.3125rem);
+  --text-lede--line-height: 1.6;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -65,12 +65,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html {
-      scroll-behavior: auto;
-    }
-    *,
-    *::before,
-    *::after {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
@@ -85,106 +81,98 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Display type is condensed via the variable width axis */
-  h1,
-  h2,
-  h3,
-  .font-display {
+  h1, h2, h3, .font-display {
     font-family: var(--font-display);
-    font-stretch: 88%;
+    font-stretch: 112%;
+    font-weight: 800;
     text-wrap: balance;
   }
 
-  p {
-    text-wrap: pretty;
-  }
+  p { text-wrap: pretty; }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: var(--color-accent-ink);
+    background-color: var(--color-cyan);
+    color: var(--color-cyan-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--color-cyan);
     outline-offset: 3px;
-    border-radius: 2px;
   }
 
-  /* Numerals in tables, specs and timing labels never jitter */
-  .tabular,
-  time,
-  th,
-  td {
-    font-variant-numeric: tabular-nums;
+  /* Geist covers tabular figures, so no second family is needed for numerals */
+  .tabular, time, th, td { font-variant-numeric: tabular-nums; }
+}
+
+/* ── Parallax ──────────────────────────────────────────────────────────────
+   Scroll-driven CSS animation: no scroll listener, composited off the main
+   thread, and it simply doesn't run where unsupported. The scale is what stops
+   the drift exposing an edge.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@utility drift {
+  will-change: transform;
+  transform: scale(1.16);
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .drift {
+      animation: drift-y linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+    .drift-slow {
+      animation: drift-y-slow linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
   }
 }
 
-/* ── Motifs ────────────────────────────────────────────────────────────── */
+@keyframes drift-y {
+  from { transform: translate3d(0, -7%, 0) scale(1.16); }
+  to   { transform: translate3d(0, 7%, 0) scale(1.16); }
+}
 
-@utility hatch {
-  /* Pit-lane diagonal hazard hatching. Used as section rules and accents. */
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--color-accent) 0 2px,
-    transparent 2px 9px
+@keyframes drift-y-slow {
+  from { transform: translate3d(0, -4%, 0) scale(1.1); }
+  to   { transform: translate3d(0, 4%, 0) scale(1.1); }
+}
+
+/* ── Surfaces ──────────────────────────────────────────────────────────── */
+
+@utility bay {
+  /* Dark section: a faint pool of light from above, like the shop lighting */
+  background-color: var(--color-ink);
+  background-image: radial-gradient(
+    120% 80% at 50% -20%,
+    rgba(34, 180, 232, 0.09) 0%,
+    transparent 60%
   );
 }
 
-@utility hatch-dim {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    var(--color-line-bright) 0 1px,
-    transparent 1px 8px
-  );
-}
-
-@utility grid-lines {
-  /* Faint technical grid, for hero and CTA backdrops */
-  background-image:
-    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-@utility grain {
-  position: relative;
+@utility concrete {
+  /* Light section: flat cool grey with a barely-there aggregate speckle */
+  background-color: var(--color-paper);
+  color: var(--color-graphite);
 }
 
 @utility grain-layer {
-  /* Low-opacity film grain so large flat blacks don't band on OLED */
   pointer-events: none;
   position: absolute;
   inset: 0;
-  opacity: 0.035;
+  opacity: 0.03;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-@utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  line-height: 1;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-fog);
-}
-
-@utility rule-accent {
-  /* 2px red keyline used to open a section */
-  height: 2px;
-  width: 3rem;
-  background-color: var(--color-accent);
-}
-
-/* Reveal-on-scroll, driven by a tiny IntersectionObserver in <Reveal /> */
-@utility reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s var(--ease-out-expo),
-    transform 0.7s var(--ease-out-expo);
-}
-
-@utility reveal-in {
-  opacity: 1;
-  transform: none;
+/* A single hairline that reads as a light source rather than a border */
+@utility lightline {
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-cyan) 18%,
+    var(--color-cyan) 82%,
+    transparent
+  );
 }

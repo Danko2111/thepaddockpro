@@ -42,7 +42,7 @@ export function SiteHeader() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
         scrolled || open
-          ? "border-b border-line bg-ink/92 backdrop-blur-md"
+          ? "border-b border-hairline bg-ink/92 backdrop-blur-md"
           : "border-b border-transparent",
       )}
     >
@@ -57,7 +57,7 @@ export function SiteHeader() {
               priority
               className="h-9 w-9 object-contain"
             />
-            <span className="font-display text-[0.95rem] font-extrabold uppercase leading-none tracking-[0.05em] text-chalk">
+            <span className="font-display text-[0.95rem] uppercase leading-none tracking-[0.05em] text-chalk">
               Paddock&nbsp;Pro
             </span>
           </Link>
@@ -73,8 +73,8 @@ export function SiteHeader() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "block px-4 py-3 font-mono text-[0.7rem] uppercase tracking-[0.14em] transition-colors",
-                      active ? "text-accent" : "text-fog hover:text-chalk",
+                      "block px-4 py-3 text-sm font-medium transition-colors",
+                      active ? "text-cyan" : "text-fog hover:text-chalk",
                     )}
                   >
                     {item.label}
@@ -82,19 +82,16 @@ export function SiteHeader() {
 
                   {hasChildren && (
                     <div
-                      className="invisible absolute left-0 top-full w-80 translate-y-1 border border-line bg-surface opacity-0 shadow-2xl shadow-black/60 transition-all duration-200 group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
+                      className="invisible absolute left-0 top-full w-80 translate-y-1 border border-hairline bg-steel opacity-0 shadow-2xl shadow-black/60 transition-all duration-200 group-hover/nav:visible group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:visible group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
                     >
                       {item.children.map((child) => (
                         <Link
                           key={child.href}
                           href={child.href}
-                          className="flex gap-3 border-b border-line px-5 py-4 transition-colors last:border-b-0 hover:bg-surface-2"
+                          className="block border-b border-hairline px-5 py-4 transition-colors last:border-b-0 hover:bg-steel-2"
                         >
-                          <span className="font-mono text-[0.65rem] tabular text-accent">{child.index}</span>
-                          <span>
-                            <span className="block text-sm font-medium text-chalk">{child.label}</span>
-                            <span className="mt-1 block text-xs leading-snug text-fog-dim">{child.detail}</span>
-                          </span>
+                          <span className="block text-sm font-medium text-chalk">{child.label}</span>
+                          <span className="mt-1 block text-xs leading-snug text-fog-dim">{child.detail}</span>
                         </Link>
                       ))}
                     </div>
@@ -107,13 +104,13 @@ export function SiteHeader() {
           <div className="flex items-center gap-2">
             <a
               href={site.phoneHref}
-              className="hidden font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fog transition-colors hover:text-chalk xl:block"
+              className="hidden text-sm font-medium text-fog transition-colors hover:text-chalk xl:block"
             >
               {site.phone}
             </a>
             <Link
               href="/contact"
-              className="hidden bg-accent px-5 py-3 font-mono text-[0.7rem] uppercase tracking-[0.14em] leading-none text-accent-ink transition-colors hover:bg-accent-hot sm:block"
+              className="hidden bg-cyan px-5 py-3 text-sm font-semibold leading-none text-cyan-ink transition-colors hover:bg-cyan-hot sm:block"
             >
               Get a quote
             </Link>
@@ -123,7 +120,7 @@ export function SiteHeader() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-controls="mobile-menu"
-              className="flex h-11 w-11 items-center justify-center border border-line text-chalk lg:hidden"
+              className="flex h-11 w-11 items-center justify-center border border-hairline text-chalk lg:hidden"
             >
               <span className="sr-only">{open ? "Close menu" : "Open menu"}</span>
               <span aria-hidden className="relative block h-3.5 w-5">
@@ -155,15 +152,15 @@ export function SiteHeader() {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-line bg-ink lg:hidden"
+        className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-hairline bg-ink lg:hidden"
       >
         <Container>
           <nav aria-label="Mobile" className="py-4">
             {mainNav.map((item) => (
-              <div key={item.href} className="border-b border-line py-1">
+              <div key={item.href} className="border-b border-hairline py-1">
                 <Link
                   href={item.href}
-                  className="block py-3 font-display text-2xl font-bold uppercase text-chalk"
+                  className="block py-3 text-2xl text-chalk"
                 >
                   {item.label}
                 </Link>
@@ -173,9 +170,8 @@ export function SiteHeader() {
                       <li key={child.href}>
                         <Link
                           href={child.href}
-                          className="flex items-center gap-3 py-2 text-sm text-fog"
+                          className="block py-2 text-sm text-fog"
                         >
-                          <span className="font-mono text-[0.65rem] tabular text-accent">{child.index}</span>
                           {child.label}
                         </Link>
                       </li>
@@ -189,13 +185,13 @@ export function SiteHeader() {
           <div className="flex flex-col gap-3 pb-8">
             <Link
               href="/contact"
-              className="bg-accent px-6 py-4 text-center font-mono text-[0.72rem] uppercase tracking-[0.16em] text-accent-ink"
+              className="bg-cyan px-6 py-4 text-center text-sm font-semibold text-cyan-ink"
             >
-              Get a quote →
+              Request a quote
             </Link>
             <a
               href={site.phoneHref}
-              className="border border-line-bright px-6 py-4 text-center font-mono text-[0.72rem] uppercase tracking-[0.16em] text-chalk"
+              className="border border-hairline-strong px-6 py-4 text-center text-sm font-semibold text-chalk"
             >
               Call {site.phone}
             </a>

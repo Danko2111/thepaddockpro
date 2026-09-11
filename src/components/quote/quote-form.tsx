@@ -10,14 +10,14 @@ import { cn } from "@/lib/cn";
 const initialState: QuoteState = { status: "idle" };
 
 const fieldBase =
-  "w-full border border-line bg-surface px-4 py-3.5 text-[0.95rem] text-chalk placeholder:text-fog-dim " +
-  "transition-colors focus:border-accent focus:outline-none";
+  "w-full border border-hairline bg-steel px-4 py-3.5 text-[0.95rem] text-chalk placeholder:text-fog-dim " +
+  "transition-colors focus:border-cyan focus:outline-none";
 
 function Label({ htmlFor, children, optional }: { htmlFor: string; children: React.ReactNode; optional?: boolean }) {
   return (
-    <label htmlFor={htmlFor} className="mb-2.5 flex items-baseline gap-2 font-mono text-[0.66rem] uppercase tracking-[0.16em] text-fog">
+    <label htmlFor={htmlFor} className="mb-2.5 flex items-baseline gap-2 text-sm font-medium text-fog">
       {children}
-      {optional && <span className="text-fog-dim normal-case tracking-normal">optional</span>}
+      {optional && <span className="text-fog-dim">optional</span>}
     </label>
   );
 }
@@ -25,7 +25,7 @@ function Label({ htmlFor, children, optional }: { htmlFor: string; children: Rea
 function FieldError({ id, errors }: { id: string; errors?: string[] }) {
   if (!errors?.length) return null;
   return (
-    <p id={id} className="mt-2 font-mono text-[0.68rem] text-accent-hot">
+    <p id={id} className="mt-2 text-sm text-cyan-hot">
       {errors[0]}
     </p>
   );
@@ -37,14 +37,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="group inline-flex items-center justify-center gap-3 bg-accent px-8 py-5 font-mono text-[0.75rem] uppercase tracking-[0.16em] leading-none text-accent-ink transition-colors hover:bg-accent-hot disabled:cursor-wait disabled:opacity-60"
+      className="inline-flex items-center justify-center bg-cyan px-8 py-5 text-[0.95rem] font-semibold leading-none text-cyan-ink transition-colors hover:bg-cyan-hot disabled:cursor-wait disabled:opacity-60"
     >
       {pending ? "Sending…" : "Send quote request"}
-      {!pending && (
-        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
-          →
-        </span>
-      )}
     </button>
   );
 }
@@ -70,10 +65,10 @@ export function QuoteForm() {
       <div
         ref={statusRef}
         tabIndex={-1}
-        className="border border-line bg-surface p-10 focus:outline-none sm:p-14"
+        className="border border-hairline bg-steel p-10 focus:outline-none sm:p-14"
       >
-        <div className="hatch mb-8 h-2.5 w-16" aria-hidden />
-        <h2 className="font-display text-3xl font-extrabold uppercase text-chalk sm:text-4xl">
+        <div className="lightline mb-8 h-0.5 w-24" aria-hidden />
+        <h2 className="text-3xl text-chalk sm:text-4xl">
           Request received
         </h2>
         <p className="mt-5 max-w-lg text-lg leading-relaxed text-fog">
@@ -85,9 +80,9 @@ export function QuoteForm() {
           the vehicle — a three-quarter front, a straight side, and close-ups of any damage or previous
           paintwork. Photos are the difference between a rough range and a firm number.
         </p>
-        <p className="mt-8 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-fog-dim">
+        <p className="mt-8 text-sm text-fog-dim">
           In a hurry?{" "}
-          <a href={site.phoneHref} className="text-accent hover:text-accent-hot">
+          <a href={site.phoneHref} className="text-cyan hover:text-cyan-hot">
             Call {site.phone}
           </a>
         </p>
@@ -106,7 +101,7 @@ export function QuoteForm() {
           ref={statusRef}
           tabIndex={-1}
           role="alert"
-          className="border-l-2 border-accent bg-surface p-5 text-sm leading-relaxed text-chalk focus:outline-none"
+          className="border-l-2 border-cyan bg-steel p-5 text-sm leading-relaxed text-chalk focus:outline-none"
         >
           {state.message}
         </div>
@@ -121,11 +116,7 @@ export function QuoteForm() {
 
       {/* ── Contact ───────────────────────────────────────────────────────── */}
       <fieldset className="space-y-6">
-        <legend className="mb-6 flex items-center gap-4">
-          <span className="font-mono text-[0.7rem] tabular text-accent">01</span>
-          <span className="hatch h-2.5 w-8 opacity-70" aria-hidden />
-          <span className="eyebrow">Who you are</span>
-        </legend>
+        <legend className="mb-6 text-lg text-chalk">Who you are</legend>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
@@ -135,7 +126,7 @@ export function QuoteForm() {
               placeholder="Alex Moreau"
               aria-invalid={!!state.errors?.name}
               aria-describedby={state.errors?.name ? "err-name" : undefined}
-              className={cn(fieldBase, state.errors?.name && "border-accent")}
+              className={cn(fieldBase, state.errors?.name && "border-cyan")}
             />
             <FieldError id="err-name" errors={state.errors?.name} />
           </div>
@@ -147,7 +138,7 @@ export function QuoteForm() {
               placeholder="alex@example.com"
               aria-invalid={!!state.errors?.email}
               aria-describedby={state.errors?.email ? "err-email" : undefined}
-              className={cn(fieldBase, state.errors?.email && "border-accent")}
+              className={cn(fieldBase, state.errors?.email && "border-cyan")}
             />
             <FieldError id="err-email" errors={state.errors?.email} />
           </div>
@@ -157,7 +148,7 @@ export function QuoteForm() {
             <input
               id="phone" name="phone" type="tel" autoComplete="tel" inputMode="tel"
               placeholder={site.phone}
-              className={cn(fieldBase, state.errors?.phone && "border-accent")}
+              className={cn(fieldBase, state.errors?.phone && "border-cyan")}
             />
             <FieldError id="err-phone" errors={state.errors?.phone} />
           </div>
@@ -174,29 +165,25 @@ export function QuoteForm() {
       </fieldset>
 
       {/* ── Job ───────────────────────────────────────────────────────────── */}
-      <fieldset className="space-y-6 border-t border-line pt-8">
-        <legend className="mb-6 flex items-center gap-4">
-          <span className="font-mono text-[0.7rem] tabular text-accent">02</span>
-          <span className="hatch h-2.5 w-8 opacity-70" aria-hidden />
-          <span className="eyebrow">What you want done</span>
-        </legend>
+      <fieldset className="space-y-6 border-t border-hairline pt-8">
+        <legend className="mb-6 text-lg text-chalk">What you want done</legend>
 
         <div>
-          <span className="mb-3 block font-mono text-[0.66rem] uppercase tracking-[0.16em] text-fog">
+          <span className="mb-3 block text-sm font-medium text-fog">
             Service — pick all that apply
           </span>
-          <div className="grid gap-px border border-line bg-line sm:grid-cols-2">
+          <div className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
             {SERVICE_OPTIONS.map((option) => (
               <label
                 key={option.value}
-                className="flex cursor-pointer items-center gap-3 bg-surface px-4 py-4 text-sm text-chalk transition-colors hover:bg-surface-2 has-checked:bg-surface-2"
+                className="flex cursor-pointer items-center gap-3 bg-steel px-4 py-4 text-sm text-chalk transition-colors hover:bg-steel-2 has-checked:bg-steel-2"
               >
                 <input
                   type="checkbox"
                   name="services"
                   value={option.value}
                   onChange={(e) => option.value === "fleet" && setFleetSelected(e.currentTarget.checked)}
-                  className="h-4 w-4 shrink-0 accent-[var(--color-accent)]"
+                  className="h-4 w-4 shrink-0 accent-[var(--color-cyan)]"
                 />
                 {option.label}
               </label>
@@ -213,7 +200,7 @@ export function QuoteForm() {
               placeholder="2021 Porsche 911 Carrera S"
               aria-invalid={!!state.errors?.vehicle}
               aria-describedby={state.errors?.vehicle ? "err-vehicle" : "hint-vehicle"}
-              className={cn(fieldBase, state.errors?.vehicle && "border-accent")}
+              className={cn(fieldBase, state.errors?.vehicle && "border-cyan")}
             />
             <p id="hint-vehicle" className="mt-2 text-xs text-fog-dim">
               Year, make and model. For fleets, describe the vehicle types.
@@ -236,7 +223,7 @@ export function QuoteForm() {
           <Label htmlFor="timeline">Timeline</Label>
           <select id="timeline" name="timeline" defaultValue="month" className={cn(fieldBase, "appearance-none")}>
             {TIMELINE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value} className="bg-surface">
+              <option key={option.value} value={option.value} className="bg-steel">
                 {option.label}
               </option>
             ))}
@@ -250,7 +237,7 @@ export function QuoteForm() {
             placeholder="Colour or finish you have in mind, coverage you want, and anything we should know about the paint — previous respray, bodywork, stone chips."
             aria-invalid={!!state.errors?.message}
             aria-describedby={state.errors?.message ? "err-message" : undefined}
-            className={cn(fieldBase, "resize-y leading-relaxed", state.errors?.message && "border-accent")}
+            className={cn(fieldBase, "resize-y leading-relaxed", state.errors?.message && "border-cyan")}
           />
           <FieldError id="err-message" errors={state.errors?.message} />
         </div>
@@ -265,7 +252,7 @@ export function QuoteForm() {
         </div>
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-6 border-t border-line pt-8">
+      <div className="flex flex-wrap items-center gap-6 border-t border-hairline pt-8">
         <SubmitButton />
         <p className="max-w-xs text-xs leading-relaxed text-fog-dim">
           We use your details to answer this enquiry and nothing else. No lists, no resale.

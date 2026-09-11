@@ -1,54 +1,52 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "outline" | "ghost";
+type Variant = "solid" | "line" | "quiet";
+type Tone = "dark" | "light";
 
 const base =
-  "group inline-flex items-center justify-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] " +
-  "transition-colors duration-200 px-6 py-4 leading-none";
+  "inline-flex items-center justify-center px-7 py-4 text-[0.9rem] font-semibold leading-none " +
+  "transition-[background-color,border-color,color] duration-200";
 
-const variants: Record<Variant, string> = {
-  primary: "bg-accent text-accent-ink hover:bg-accent-hot",
-  outline: "border border-line-bright text-chalk hover:border-accent hover:text-accent",
-  ghost: "text-fog hover:text-chalk",
+const styles: Record<Tone, Record<Variant, string>> = {
+  dark: {
+    solid: "bg-cyan text-cyan-ink hover:bg-cyan-hot",
+    line: "border border-hairline text-chalk hover:border-cyan hover:text-cyan",
+    quiet: "px-0 text-fog hover:text-chalk",
+  },
+  light: {
+    solid: "bg-graphite text-paper hover:bg-cyan-deep",
+    line: "border border-hairline-light text-graphite hover:border-cyan-deep hover:text-cyan-deep",
+    quiet: "px-0 text-slate hover:text-graphite",
+  },
 };
 
 export function Cta({
   href,
   children,
-  variant = "primary",
+  variant = "solid",
+  tone = "dark",
   className,
-  arrow = true,
-  ...rest
 }: {
   href: string;
   children: React.ReactNode;
   variant?: Variant;
+  tone?: Tone;
   className?: string;
-  arrow?: boolean;
-} & Omit<React.ComponentProps<typeof Link>, "href" | "className" | "children">) {
-  const external = href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:");
-  const content = (
-    <>
-      {children}
-      {arrow && (
-        <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-1">
-          →
-        </span>
-      )}
-    </>
-  );
+}) {
+  const classes = cn(base, styles[tone][variant], className);
+  const external = /^(https?:|tel:|mailto:)/.test(href);
 
   if (external) {
     return (
-      <a href={href} className={cn(base, variants[variant], className)}>
-        {content}
+      <a href={href} className={classes}>
+        {children}
       </a>
     );
   }
   return (
-    <Link href={href} className={cn(base, variants[variant], className)} {...rest}>
-      {content}
+    <Link href={href} className={classes}>
+      {children}
     </Link>
   );
 }

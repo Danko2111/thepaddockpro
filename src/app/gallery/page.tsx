@@ -24,20 +24,14 @@ export default function GalleryPage() {
       <PageHero
         eyebrow={`${galleryCount} projects`}
         breadcrumbs={trail}
-        title={
-          <>
-            Work that
-            <br />
-            left the shop
-          </>
-        }
+        title="Work that left the bay"
         lede="Every car here was stripped, prepped and wrapped in our bay. No stock photography, no borrowed portfolios — if it is on this page, we did it."
       />
 
-      <section className="py-16 sm:py-20">
+      <section className="bay py-16 sm:py-20">
         <Container>
           {galleryCount === 0 ? (
-            <p className="py-24 text-center text-lg text-fog">
+            <p className="py-24 text-center text-lede text-fog">
               Photography is being added. In the meantime, ask us for recent examples of the work you have
               in mind.
             </p>
@@ -48,7 +42,6 @@ export default function GalleryPage() {
       </section>
 
       <CtaBand
-        eyebrow="Your car next"
         title="Want yours on this page?"
         body="Send the vehicle and the finish you are after. We will tell you what is realistic, what it costs and how long we would need the car."
       />

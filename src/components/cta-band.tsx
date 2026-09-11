@@ -1,45 +1,39 @@
+import Image from "next/image";
 import { site } from "@/config/site";
 import { Container } from "./ui/container";
 import { Cta } from "./ui/cta";
 
 export function CtaBand({
-  eyebrow = "Next step",
   title = "Tell us about the car",
-  body = "Send the year, make, model and what you have in mind. Photos help. We come back with a realistic range, the film we would use and how long the car would be with us.",
+  body = "Send the year, make, model and what you have in mind. Photos help. You get a realistic range back the same day, the film we would use, and how long the car would be with us.",
 }: {
-  eyebrow?: string;
   title?: string;
   body?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden bg-surface">
-      <div aria-hidden className="hatch absolute inset-x-0 top-0 h-1.5 opacity-70" />
-      <div aria-hidden className="grid-lines absolute inset-0 -z-10 opacity-30" />
+    <section className="relative isolate overflow-hidden">
+      <div className="absolute inset-0 -z-20 overflow-hidden">
+        <Image
+          src="/brand/hero-bronco.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={78}
+          className="drift-slow object-cover object-[center_45%]"
+        />
+      </div>
+      <div aria-hidden className="absolute inset-0 -z-10 bg-ink/82" />
+      <div aria-hidden className="grain-layer -z-10" />
 
-      <Container className="py-24 sm:py-28">
-        <div className="grid items-end gap-12 lg:grid-cols-[1.3fr_1fr]">
-          <div>
-            <p className="eyebrow">{eyebrow}</p>
-            <h2 className="mt-6 max-w-[16ch] font-display text-section font-extrabold uppercase text-chalk">
-              {title}
-            </h2>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-fog">{body}</p>
-          </div>
+      <Container className="py-28 sm:py-36">
+        <div className="max-w-2xl">
+          <h2 className="text-section text-chalk">{title}</h2>
+          <p className="mt-6 max-w-[58ch] text-lede text-fog">{body}</p>
 
-          <div className="flex flex-col gap-3">
-            <Cta href="/contact" className="justify-between px-7 py-5 text-[0.75rem]">
-              Request a quote
-            </Cta>
-            <Cta href={site.phoneHref} variant="outline" arrow={false} className="justify-between px-7 py-5 text-[0.75rem]">
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <Cta href="/contact">Request a quote</Cta>
+            <Cta href={site.phoneHref} variant="line">
               {site.phone}
-            </Cta>
-            <Cta
-              href={`mailto:${site.email}`}
-              variant="outline"
-              arrow={false}
-              className="justify-between px-7 py-5 text-[0.75rem]"
-            >
-              {site.email}
             </Cta>
           </div>
         </div>

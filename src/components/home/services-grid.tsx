@@ -1,63 +1,79 @@
+import Image from "next/image";
 import Link from "next/link";
 import { services } from "@/config/services";
+import { imagesByCategory } from "@/lib/gallery";
 import { Container } from "../ui/container";
 import { SectionHead } from "../ui/section-head";
-import { Reveal } from "../ui/reveal";
+import { Cta } from "../ui/cta";
 
+/**
+ * Light section, contained, carded — the counterweight to the full-bleed dark
+ * bands either side of it. Services we have photographed become photo cards;
+ * the rest are type-led. The grid varies because the content does, not because
+ * a layout wanted texture.
+ */
 export function ServicesGrid() {
-  return (
-    <section className="border-b border-line py-24 sm:py-32">
-      <Container>
-        <SectionHead
-          index="01"
-          eyebrow="What we do"
-          title={
-            <>
-              Four services.
-              <br />
-              One standard.
-            </>
-          }
-          lede="Whether it is a full colour change on a weekend car or fifteen vans that need to look identical, the preparation is the same and the film is the same."
-        />
+  const cards = services.map((service) => ({
+    service,
+    image: imagesByCategory(service.galleryCategory)[0] ?? null,
+  }));
 
-        <ul className="mt-16 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, i) => (
-            <Reveal as="li" key={service.slug} delay={i * 70} className="bg-ink">
+  return (
+    <section className="concrete py-24 sm:py-32">
+      <Container>
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <SectionHead
+            tone="light"
+            title="Six things we do, one way of doing them"
+            lede="A weekend car and a plumber's van get the same preparation: trim off, paint decontaminated, film chosen for the bodywork in front of us."
+          />
+          <Cta href="/services" variant="line" tone="light">
+            All services
+          </Cta>
+        </div>
+
+        <ul className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map(({ service, image }) => (
+            <li key={service.slug}>
               <Link
                 href={`/services/${service.slug}`}
-                className="group flex h-full flex-col p-8 transition-colors duration-300 hover:bg-surface sm:p-10"
+                className="group flex h-full flex-col overflow-hidden rounded border border-hairline-light bg-paper-raised transition-colors duration-300 hover:border-graphite/35"
               >
-                <div className="flex items-center gap-4">
-                  <span className="font-mono text-[0.7rem] tabular text-accent">{service.index}</span>
-                  <span className="h-px flex-1 bg-line transition-colors duration-300 group-hover:bg-accent" />
-                </div>
+                {image ? (
+                  <div className="relative aspect-[5/3] overflow-hidden bg-paper">
+                    <Image
+                      src={image.src}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      placeholder="blur"
+                      blurDataURL={image.blurDataURL}
+                      className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05]"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[5/3] bg-graphite/[0.04]" aria-hidden />
+                )}
 
-                <h3 className="mt-7 font-display text-2xl font-bold uppercase text-chalk sm:text-3xl">
-                  {service.name}
-                </h3>
-                <p className="mt-3 text-base text-fog">{service.tagline}</p>
-                <p className="mt-5 flex-1 text-sm leading-relaxed text-fog-dim">{service.intro[0]}</p>
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="text-xl text-graphite">{service.name}</h3>
+                  <p className="mt-2.5 text-[0.95rem] leading-relaxed text-slate">{service.tagline}</p>
 
-                <div className="mt-8 flex flex-wrap items-center gap-2">
-                  {service.materials.map((m) => (
-                    <span
-                      key={m}
-                      className="border border-line px-2.5 py-1.5 font-mono text-[0.6rem] uppercase tracking-[0.12em] text-fog-dim"
-                    >
-                      {m}
-                    </span>
-                  ))}
-                </div>
+                  <dl className="mt-6 flex-1 space-y-1.5 border-t border-hairline-light pt-5 text-sm">
+                    {service.spec.slice(0, 2).map((row) => (
+                      <div key={row.label} className="flex justify-between gap-4">
+                        <dt className="text-slate-dim">{row.label}</dt>
+                        <dd className="text-right tabular text-graphite">{row.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
 
-                <span className="mt-8 inline-flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-chalk">
-                  Read more
-                  <span aria-hidden className="text-accent transition-transform duration-200 group-hover:translate-x-1.5">
-                    →
+                  <span className="mt-6 text-sm font-semibold text-cyan-deep underline-offset-4 group-hover:underline">
+                    {service.shortName} detail
                   </span>
-                </span>
+                </div>
               </Link>
-            </Reveal>
+            </li>
           ))}
         </ul>
       </Container>

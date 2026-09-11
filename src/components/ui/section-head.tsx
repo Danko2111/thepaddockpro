@@ -1,50 +1,43 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Standard section opener: mono index, hairline, condensed headline.
- * Keeps every section on the site rhythmically identical.
+ * A section opener is a headline and, when it genuinely helps, a lede. The
+ * numbered marker and tracked-out label that used to sit above every heading
+ * were decoration — none of these sections are sequences, and the labels
+ * repeated what the headline already said.
  */
 export function SectionHead({
-  index,
-  eyebrow,
   title,
   lede,
+  tone = "dark",
   align = "left",
   className,
   as: Heading = "h2",
 }: {
-  index?: string;
-  eyebrow?: string;
   title: React.ReactNode;
   lede?: React.ReactNode;
+  tone?: "dark" | "light";
   align?: "left" | "center";
   className?: string;
   as?: "h1" | "h2";
 }) {
   return (
-    <div className={cn(align === "center" && "mx-auto max-w-3xl text-center", "max-w-3xl", className)}>
-      {(index || eyebrow) && (
-        <div
-          className={cn(
-            "mb-6 flex items-center gap-4",
-            align === "center" && "justify-center",
-          )}
-        >
-          {index && <span className="font-mono text-[0.7rem] tabular text-accent">{index}</span>}
-          <span className="hatch h-2.5 w-10 opacity-70" aria-hidden />
-          {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-        </div>
-      )}
+    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center", className)}>
       <Heading
         className={cn(
-          "font-display font-extrabold uppercase text-chalk",
           Heading === "h1" ? "text-hero" : "text-section",
+          tone === "dark" ? "text-chalk" : "text-graphite",
         )}
       >
         {title}
       </Heading>
       {lede && (
-        <p className={cn("mt-6 text-lg leading-relaxed text-fog", align === "center" && "mx-auto")}>
+        <p
+          className={cn(
+            "mt-6 max-w-[62ch] text-lede",
+            tone === "dark" ? "text-fog" : "text-slate",
+          )}
+        >
           {lede}
         </p>
       )}
