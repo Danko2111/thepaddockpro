@@ -5,7 +5,8 @@ import { site } from "@/config/site";
  *
  * Brand and product line are typographically separated so the strip reads as
  * information rather than a logo wall. The track is duplicated once and
- * travels exactly -50%, which is what makes the loop seamless.
+ * travels exactly -50%, which is what makes the loop seamless. It runs
+ * continuously and does not pause.
  */
 const FILMS = [
   { brand: "3M", line: "2080 Series" },
@@ -24,7 +25,7 @@ export function MaterialsMarquee() {
   return (
     <section
       aria-label={`Film ${site.name} installs`}
-      className="marquee group relative overflow-hidden border-y border-hairline bg-asphalt py-6"
+      className="marquee relative overflow-hidden border-y border-hairline bg-asphalt py-6"
     >
       <div className="marquee-track flex w-max items-center">
         {[0, 1].map((copy) => (

@@ -2,14 +2,9 @@ import { Hero } from "@/components/home/hero";
 import { MaterialsMarquee } from "@/components/home/materials-marquee";
 import { ServicesGrid } from "@/components/home/services-grid";
 import { FeaturedWork } from "@/components/home/featured-work";
-import { ProcessTeaser } from "@/components/home/process-teaser";
-import { MaterialsStrip } from "@/components/home/materials-strip";
-import { FaqList } from "@/components/faq-list";
 import { CtaBand } from "@/components/cta-band";
-import { services } from "@/config/services";
 import { site } from "@/config/site";
 import { buildMetadata } from "@/lib/seo";
-import { JsonLd, faqSchema } from "@/lib/schema";
 
 export const metadata = buildMetadata({
   title: "Vehicle Wraps, PPF & Fleet Graphics",
@@ -17,14 +12,15 @@ export const metadata = buildMetadata({
   path: "/",
 });
 
-/** One question per service; each service page carries the full set. */
-const homeFaqs = services.map((service) => service.faqs[0]);
-
 /*
- * Section rhythm alternates dark/full-bleed with light/contained. Read down the
- * list and you should see the page breathe:
- *   dark full-bleed → marquee → LIGHT carded → dark full-bleed →
- *   LIGHT rail → dark typographic → LIGHT → dark full-bleed
+ * Lean homepage: the photograph, what we do, proof, ask.
+ *   dark full-bleed → marquee → LIGHT carded → dark full-bleed → dark CTA
+ *
+ * No FAQPage structured data here any more. Google requires FAQ markup to
+ * match questions that are actually visible on the page, and the FAQ section
+ * is gone — emitting it anyway risks a structured-data manual action. The
+ * questions still carry FAQPage markup on the service pages, /process and
+ * /cost-guide, where they are on screen.
  */
 export default function HomePage() {
   return (
@@ -33,15 +29,7 @@ export default function HomePage() {
       <MaterialsMarquee />
       <ServicesGrid />
       <FeaturedWork />
-      <ProcessTeaser />
-      <MaterialsStrip />
-      <FaqList
-        faqs={homeFaqs}
-        title="The questions everyone asks"
-        lede="One answer per service. Each service page goes further."
-      />
       <CtaBand />
-      <JsonLd data={faqSchema(homeFaqs)} />
     </>
   );
 }

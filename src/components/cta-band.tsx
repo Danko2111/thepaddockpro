@@ -11,7 +11,7 @@ export function CtaBand({
   body?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="relative isolate overflow-hidden border-t border-hairline">
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <Image
           src="/brand/hero-bronco.jpg"

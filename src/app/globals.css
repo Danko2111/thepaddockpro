@@ -182,11 +182,6 @@
   animation: marquee-scroll 64s linear infinite;
 }
 
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track {
-  animation-play-state: paused;
-}
-
 @keyframes marquee-scroll {
   to { transform: translate3d(-50%, 0, 0); }
 }
