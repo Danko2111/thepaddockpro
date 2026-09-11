@@ -33,8 +33,8 @@ edit the generated file — use `src/data/gallery-overrides.json`.
 and a breadcrumb is incomplete.
 
 **Keep it static.** Every route prerenders. Server Components by default; the
-only Client Components are the header, the gallery grid, the quote form and
-`Reveal`. Don't add a client boundary without a reason that survives scrutiny.
+only Client Components are the header, the gallery grid and the quote form.
+Don't add a client boundary without a reason that survives scrutiny.
 
 **American English** throughout the copy.
 <!-- END:project-rules -->
