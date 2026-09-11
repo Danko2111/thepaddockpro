@@ -21,8 +21,13 @@ export function Hero() {
         priority
         sizes="100vw"
         quality={82}
-        // Portrait source in a wide hero — bias the crop down to the wall graphic and vehicle
-        className="-z-20 object-cover object-[center_58%]"
+        // ⛔ TEMPORARY hero. Two problems before this can ship:
+        //   1. Source is 596x335 — upscaled 2x here, still soft full-bleed.
+        //      Needs the original file.
+        //   2. The building signage in it reads "THE PADDOCK", not "Paddock
+        //      Pro", which contradicts the name in the header two inches above.
+        // Fallback available at /brand/hero-bronco.jpg.
+        className="-z-20 object-cover object-[center_56%]"
       />
       <div
         aria-hidden
