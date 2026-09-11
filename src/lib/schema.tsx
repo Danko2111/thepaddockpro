@@ -3,14 +3,14 @@ import type { Service } from "@/config/services";
 
 const id = (hash: string) => `${site.url}/#${hash}`;
 
-/** Only emit geo if real coordinates have been filled in. */
+/**
+ * Only emit geo if real coordinates have been filled in. `site` is `as const`,
+ * so widen these before comparing or TS reads the guard as a literal mismatch.
+ */
+const { latitude, longitude }: { latitude: number; longitude: number } = site.geo;
 const geo =
-  site.geo.latitude !== 0 || site.geo.longitude !== 0
-    ? {
-        "@type": "GeoCoordinates",
-        latitude: site.geo.latitude,
-        longitude: site.geo.longitude,
-      }
+  latitude !== 0 || longitude !== 0
+    ? { "@type": "GeoCoordinates", latitude, longitude }
     : undefined;
 
 const sameAs = Object.values(site.social).filter(Boolean);

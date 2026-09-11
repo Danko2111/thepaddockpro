@@ -90,7 +90,18 @@ export default function ProcessPage() {
             lede="Film is a minority of what a wrap costs — labour is the rest. Saving a few hundred dollars on material buys a job that has to be redone in two years, at full labour price. We only install cast film from houses that stand behind it."
           />
 
-          <div className="mt-16 space-y-px border border-line bg-line">
+          <ul className="mt-10 flex flex-wrap gap-2">
+            {site.credentials.map((credential) => (
+              <li
+                key={credential}
+                className="border border-line-bright px-3.5 py-2 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-fog"
+              >
+                {credential}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-12 space-y-px border border-line bg-line">
             {materials.map((material, i) => (
               <Reveal key={material.brand} delay={i * 70}>
                 <article className="grid gap-8 bg-ink-soft p-8 lg:grid-cols-[16rem_1fr_16rem] sm:p-12">

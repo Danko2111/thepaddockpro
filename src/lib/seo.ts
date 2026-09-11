@@ -68,7 +68,8 @@ export function buildMetadata({
 export function warnOnPlaceholders() {
   if (process.env.NODE_ENV === "production") return;
   const problems: string[] = [];
-  if (site.geo.latitude === 0 && site.geo.longitude === 0)
+  const geo: { latitude: number; longitude: number } = site.geo;
+  if (geo.latitude === 0 && geo.longitude === 0)
     problems.push("geo coordinates (right-click the shop in Google Maps to copy them)");
   if (!site.mapEmbedUrl) problems.push("mapEmbedUrl (Google Maps → Share → Embed a map)");
   if (site.email.startsWith("info@") && !process.env.NEXT_PUBLIC_EMAIL_CONFIRMED)

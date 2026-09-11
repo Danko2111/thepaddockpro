@@ -21,7 +21,8 @@ export function Hero() {
         priority
         sizes="100vw"
         quality={82}
-        className="-z-20 object-cover"
+        // Portrait source in a wide hero — bias the crop down to the wall graphic and vehicle
+        className="-z-20 object-cover object-[center_58%]"
       />
       <div
         aria-hidden

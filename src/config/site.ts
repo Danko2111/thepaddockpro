@@ -101,8 +101,13 @@ export const site = {
     source: "Google",
   },
 
-  /** ⛔ TODO only claim certifications the shop actually holds. */
+  /**
+   * ⛔ CONFIRM — "ORAFOL Certified Vehicle Wrap Installer" is read off the sign
+   * on the shop wall in the supplied photos. Verify it is current before
+   * launch; a lapsed certification claim is worse than no claim.
+   */
   credentials: [
+    "ORAFOL Certified Vehicle Wrap Installer",
     "3M and Avery Dennison cast films",
     "Inozetek Super Gloss",
     "Ceramic and carbon window film",

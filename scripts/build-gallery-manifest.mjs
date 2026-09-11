@@ -33,7 +33,7 @@ const IMAGE_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".avif"]);
 
 /** Tokens that should never be title-cased into "Bmw" or "Ppf". */
 const UPPERCASE_TOKENS = new Set([
-  "bmw", "gmc", "amg", "ppf", "gt", "gtr", "gt3", "gt4", "rs", "rs3", "rs5", "rs6", "rs7",
+  "bmw", "vw", "gmc", "amg", "ppf", "gt", "gtr", "gt3", "gt4", "rs", "rs3", "rs5", "rs6", "rs7",
   "m2", "m3", "m4", "m5", "m8", "sq5", "s3", "s4", "s5", "gti", "sti", "wrx", "svt", "srt",
   "tt", "z4", "q5", "q7", "q8", "x3", "x5", "x6", "x7", "id4", "ev6", "mx5", "brz", "gr86",
   "c8", "c7", "zl1", "z06", "f150", "f250", "f350", "cx5", "rav4", "crv", "hrv", "nsx",

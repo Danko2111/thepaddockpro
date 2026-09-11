@@ -1,10 +1,38 @@
 {
-  "_readme": "Optional per-image overrides, keyed by the image src. Everything is derived from the folder + filename by default; only add an entry when you need to override it. Delete the _readme key whenever you like.",
-  "_example": {
-    "src": "/gallery/color-change/porsche-992-satin-black.jpg",
-    "title": "992 GT3 · Satin Black",
-    "alt": "Porsche 992 GT3 wrapped in 3M satin black, shot in the shop bay",
-    "caption": "Full colour change in 3M 2080 Satin Black, chrome delete included.",
+  "_readme": "Optional per-image overrides, keyed by image src. Titles, captions and alt text are derived from the folder and filename by default — only add an entry when you want to be precise. Delete _readme whenever you like.",
+
+  "/gallery/colour-change/01-vw-golf-gti-satin-slate-blue.jpg": {
+    "title": "VW Golf GTI · Satin Slate Blue",
+    "caption": "Full colour change in satin slate blue.",
+    "alt": "Volkswagen Golf GTI wrapped in satin slate blue vinyl, lowered on silver wheels, photographed in the Paddock Pro shop in Langley, BC",
+    "featured": true
+  },
+
+  "/gallery/colour-change/02-ford-f150-white.jpg": {
+    "_note": "⛔ CHECK — what did this truck actually get? The caption and folder are a best guess from the photo. If it was PPF, tint or ceramic, just move the file into that folder and rename it; everything else updates on the next build.",
+    "title": "Ford F-150",
+    "caption": "Lowered F-150 in the Langley bay.",
+    "alt": "Lowered white Ford F-150 on black wheels under hexagon lighting in the Paddock Pro shop in Langley, BC"
+  },
+
+  "/gallery/fleet/01-fire-alert-mercedes-sprinter-wrap.jpg": {
+    "title": "Fire-Alert · Mercedes Sprinter",
+    "caption": "Partial fleet wrap for a local fire protection company.",
+    "alt": "Mercedes-Benz Sprinter van wrapped with black and red Fire-Alert fire protection branding by Paddock Pro in Langley, BC",
+    "featured": true
+  },
+
+  "/gallery/fleet/02-rh-mechanical-ford-transit-wrap.jpg": {
+    "title": "R.H. Mechanical · Ford Transit",
+    "caption": "Full-height Transit wrapped for commercial, strata and industrial work.",
+    "alt": "Ford Transit high-roof van wrapped in blue and black R.H. Mechanical Ltd fleet graphics by Paddock Pro in Langley, BC",
+    "featured": true
+  },
+
+  "/gallery/ceramic-coating/01-acura-nsx-gloss-black-ceramic-coating.jpg": {
+    "title": "Acura NSX · Ceramic Coating",
+    "caption": "Gloss black NSX, corrected and coated.",
+    "alt": "Gloss black Acura NSX after paint correction and ceramic coating at Paddock Pro in Langley, BC",
     "featured": true
   }
 }
