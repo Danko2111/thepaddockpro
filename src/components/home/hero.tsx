@@ -6,7 +6,7 @@ import { GoogleRating } from "../google-rating";
 
 export function Hero() {
   return (
-    <section className="relative isolate flex min-h-[88svh] flex-col justify-end overflow-hidden pt-[4.5rem]">
+    <section className="relative isolate flex min-h-svh flex-col justify-end overflow-hidden pt-[4.5rem]">
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <Image
           src="/brand/hero-shop-lineup.jpg"
@@ -70,6 +70,11 @@ export function Hero() {
               </p>
             </div>
           </div>
+        </div>
+        {/* The hero now fills the viewport, so say that there is more below */}
+        <div aria-hidden className="mt-14 hidden items-center gap-4 sm:flex">
+          <span className="scroll-cue h-10 w-px bg-hairline-strong" />
+          <span className="text-sm text-fog-dim">Scroll</span>
         </div>
       </Container>
     </section>

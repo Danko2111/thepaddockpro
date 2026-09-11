@@ -1,5 +1,5 @@
 import { Hero } from "@/components/home/hero";
-import { MaterialsBand } from "@/components/home/materials-band";
+import { MaterialsMarquee } from "@/components/home/materials-marquee";
 import { ServicesGrid } from "@/components/home/services-grid";
 import { FeaturedWork } from "@/components/home/featured-work";
 import { ProcessTeaser } from "@/components/home/process-teaser";
@@ -23,14 +23,14 @@ const homeFaqs = services.map((service) => service.faqs[0]);
 /*
  * Section rhythm alternates dark/full-bleed with light/contained. Read down the
  * list and you should see the page breathe:
- *   dark full-bleed → dark band → LIGHT carded → dark full-bleed →
+ *   dark full-bleed → marquee → LIGHT carded → dark full-bleed →
  *   LIGHT rail → dark typographic → LIGHT → dark full-bleed
  */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <MaterialsBand />
+      <MaterialsMarquee />
       <ServicesGrid />
       <FeaturedWork />
       <ProcessTeaser />

@@ -166,6 +166,54 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* ── Marquee ───────────────────────────────────────────────────────────────
+   The track holds two identical copies, so translating exactly -50% lands the
+   second copy where the first began and the loop is seamless. Slow on purpose:
+   this is a credential, not an attention grab.
+   ────────────────────────────────────────────────────────────────────────── */
+
+@utility marquee {
+  /* Soften both edges so items fade rather than clip at the viewport */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6rem, black calc(100% - 6rem), transparent);
+  mask-image: linear-gradient(to right, transparent, black 6rem, black calc(100% - 6rem), transparent);
+}
+
+@utility marquee-track {
+  animation: marquee-scroll 64s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* The global reset would freeze the track mid-travel; hold it at the start */
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@utility scroll-cue {
+  position: relative;
+  overflow: hidden;
+  background-image: linear-gradient(to bottom, var(--color-cyan), transparent);
+  background-size: 100% 40%;
+  background-repeat: no-repeat;
+  animation: scroll-cue-travel 2.6s ease-in-out infinite;
+}
+
+@keyframes scroll-cue-travel {
+  0%   { background-position: 0 -40%; }
+  60%  { background-position: 0 140%; }
+  100% { background-position: 0 140%; }
+}
+
 /* A single hairline that reads as a light source rather than a border */
 @utility lightline {
   background-image: linear-gradient(
