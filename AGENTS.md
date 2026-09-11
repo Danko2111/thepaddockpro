@@ -36,5 +36,8 @@ and a breadcrumb is incomplete.
 only Client Components are the header, the gallery grid and the quote form.
 Don't add a client boundary without a reason that survives scrutiny.
 
-**American English** throughout the copy.
+**Canadian English** throughout the copy — colour, neighbourhood, behaviour,
+with -ize endings. The shop is in Langley, BC. Note the exceptions: CSS
+properties and tokens stay `color`, and so does anything that is an
+identifier rather than prose.
 <!-- END:project-rules -->
