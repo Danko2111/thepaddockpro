@@ -1,26 +1,190 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ═══════════════════════════════════════════════════════════════════════════
+   THE PADDOCK PRO — DESIGN TOKENS
+   Dark, motorsport-paddock direction. One hot accent, everything else is
+   carbon greys and hairlines. Change --color-accent to re-skin the whole site.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Surfaces — near-black, warmed very slightly so it doesn't read as #000 */
+  --color-ink: #08080a;
+  --color-ink-soft: #0d0d11;
+  --color-surface: #131318;
+  --color-surface-2: #1b1b22;
+
+  /* Hairlines */
+  --color-line: #24242e;
+  --color-line-bright: #38384a;
+
+  /* Type */
+  --color-chalk: #f5f5f7;
+  --color-fog: #8b8b9a;
+  --color-fog-dim: #5e5e6c;
+
+  /* Accent — the electric cyan sampled from the Paddock Pro logo. The only
+     saturated colour in the system; change this token to re-skin the site. */
+  --color-accent: #22b4e8;
+  --color-accent-hot: #54c7f2;
+  --color-accent-dim: #116b8e;
+
+  /* Deeper logo blue, for gradients and hover grounds. */
+  --color-accent-deep: #1460a9;
+
+  /* Text on an accent-filled surface. Cyan is too light to carry white text —
+     white on #22b4e8 is 2.4:1 and fails WCAG AA. This pairing is 7.6:1. */
+  --color-accent-ink: #04161e;
+
+  --font-display: var(--font-display), "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", monospace;
+
+  /* Editorial display scale — clamped so it never needs breakpoint overrides */
+  --text-display: clamp(2.75rem, 9vw, 8rem);
+  --text-display--line-height: 0.88;
+  --text-display--letter-spacing: -0.035em;
+
+  --text-hero: clamp(2.25rem, 6.5vw, 5.5rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.03em;
+
+  --text-section: clamp(1.875rem, 4.2vw, 3.5rem);
+  --text-section--line-height: 0.95;
+  --text-section--letter-spacing: -0.025em;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base ──────────────────────────────────────────────────────────────── */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-chalk);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Display type is condensed via the variable width axis */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    font-stretch: 88%;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Numerals in tables, specs and timing labels never jitter */
+  .tabular,
+  time,
+  th,
+  td {
+    font-variant-numeric: tabular-nums;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Motifs ────────────────────────────────────────────────────────────── */
+
+@utility hatch {
+  /* Pit-lane diagonal hazard hatching. Used as section rules and accents. */
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-accent) 0 2px,
+    transparent 2px 9px
+  );
+}
+
+@utility hatch-dim {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-line-bright) 0 1px,
+    transparent 1px 8px
+  );
+}
+
+@utility grid-lines {
+  /* Faint technical grid, for hero and CTA backdrops */
+  background-image:
+    linear-gradient(to right, var(--color-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility grain {
+  position: relative;
+}
+
+@utility grain-layer {
+  /* Low-opacity film grain so large flat blacks don't band on OLED */
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fog);
+}
+
+@utility rule-accent {
+  /* 2px red keyline used to open a section */
+  height: 2px;
+  width: 3rem;
+  background-color: var(--color-accent);
+}
+
+/* Reveal-on-scroll, driven by a tiny IntersectionObserver in <Reveal /> */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s var(--ease-out-expo),
+    transform 0.7s var(--ease-out-expo);
+}
+
+@utility reveal-in {
+  opacity: 1;
+  transform: none;
 }

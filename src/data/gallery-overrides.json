@@ -1,0 +1,10 @@
+{
+  "_readme": "Optional per-image overrides, keyed by the image src. Everything is derived from the folder + filename by default; only add an entry when you need to override it. Delete the _readme key whenever you like.",
+  "_example": {
+    "src": "/gallery/color-change/porsche-992-satin-black.jpg",
+    "title": "992 GT3 · Satin Black",
+    "alt": "Porsche 992 GT3 wrapped in 3M satin black, shot in the shop bay",
+    "caption": "Full colour change in 3M 2080 Satin Black, chrome delete included.",
+    "featured": true
+  }
+}
