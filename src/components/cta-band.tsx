@@ -8,7 +8,7 @@ import { Cta } from "./ui/cta";
  * read from across the room, the address and hours, and two ways in.
  */
 export function CtaBand({
-  title = "Bring it to the bay",
+  title = "Bring it to the Paddock Pro",
   body,
 }: {
   title?: string;

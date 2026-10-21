@@ -29,7 +29,7 @@ export const metadata = buildMetadata({
  * service pages and /process, where they are on screen.
  */
 
-/** The three frames under "Out of the bay", picked by the client */
+/** The three frames under "Out of the paddock", picked by the client */
 const WORK = [
   "/gallery/colour-change/01-vw-golf-gti-satin-slate-blue.jpg",
   "/gallery/ceramic-coating/01-acura-nsx-gloss-black-ceramic-coating.jpg",
@@ -114,7 +114,7 @@ export default function HomePage() {
       <section className="floor">
         <div className={s.inner}>
           <div className={s.head} data-reveal>
-            <h2 className="max-w-[17ch] text-section">Out of the bay</h2>
+            <h2 className="max-w-[17ch] text-section">Out of the paddock</h2>
             <Link href="/gallery" className="text-link">
               All {galleryCount} projects
             </Link>
