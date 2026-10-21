@@ -13,7 +13,6 @@ export const mainNav = [
   },
   { label: "Work", href: "/gallery" },
   { label: "Process", href: "/process" },
-  { label: "Cost guide", href: "/cost-guide" },
   { label: "About", href: "/about" },
 ] as const;
 
@@ -28,7 +27,6 @@ export const footerNav = [
       { label: "Completed work", href: "/gallery" },
       { label: "Our process", href: "/process" },
       { label: "Materials we use", href: "/process#materials" },
-      { label: "What a wrap costs", href: "/cost-guide" },
       { label: "About the shop", href: "/about" },
     ],
   },
