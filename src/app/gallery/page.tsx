@@ -26,12 +26,14 @@ export default function GalleryPage() {
         breadcrumbs={trail}
         title="Work that left the bay"
         lede="Every car here was stripped, prepped and wrapped in our bay. No stock photography, no borrowed portfolios — if it is on this page, we did it."
+        image={{ src: "/gallery/fleet/02-rh-mechanical-ford-transit-wrap.jpg" }}
+        imagePosition="center 60%"
       />
 
-      <section className="bay py-16 sm:py-20">
+      <section className="floor py-16 sm:py-24">
         <Container>
           {galleryCount === 0 ? (
-            <p className="py-24 text-center text-lede text-fog">
+            <p className="py-24 text-center text-lede text-slate">
               Photography is being added. In the meantime, ask us for recent examples of the work you have
               in mind.
             </p>

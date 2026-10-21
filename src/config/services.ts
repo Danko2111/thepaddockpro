@@ -322,6 +322,14 @@ export const serviceBySlug = (slug: string) => services.find((s) => s.slug === s
 
 export const serviceSlugs = services.map((s) => s.slug);
 
+/** The spec row that says how long the car is with us, whatever it's labelled */
+export function shopTime(service: Service) {
+  const row =
+    service.spec.find((r) => /shop time|turnaround/i.test(r.label)) ?? service.spec[0];
+  // Spec values are written to stand alone; drop the hedge so callers can add their own
+  return row.value.replace(/^Typically\s+/i, "");
+}
+
 /** Filter labels for the gallery, derived from the service list. */
 export const galleryCategories = [
   { key: "all", label: "All work" },

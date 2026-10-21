@@ -42,6 +42,10 @@ export function imagesByCategory(category: string): GalleryImage[] {
   return galleryImages.filter((image) => image.category === category);
 }
 
+export function imageBySrc(src: string) {
+  return galleryImages.find((image) => image.src === src) ?? null;
+}
+
 /**
  * Homepage strip: anything flagged featured, topped up with the newest work
  * and interleaved across services so one category can't dominate.

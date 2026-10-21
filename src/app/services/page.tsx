@@ -27,9 +27,11 @@ export default function ServicesPage() {
         breadcrumbs={trail}
         title="Everything we put on a car"
         lede="Six services, one preparation standard. Every job starts the same way — trim off, paint decontaminated, film chosen for the bodywork in front of us rather than whatever is on the shelf."
+        image={{ src: "/gallery/colour-change/01-vw-golf-gti-satin-slate-blue.jpg" }}
+        imagePosition="center 70%"
       />
 
-      {/* Light and contained: alternating rows, image side swapping down the page */}
+      {/* Alternating rows, the slanted frame swapping sides down the page */}
       <section className="concrete py-20 sm:py-28">
         <Container>
           <ul className="space-y-20 sm:space-y-28">
@@ -38,11 +40,11 @@ export default function ServicesPage() {
               const flip = i % 2 === 1;
 
               return (
-                <li key={service.slug}>
+                <li key={service.slug} data-reveal>
                   <article className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
                     <div className={flip ? "lg:order-2" : undefined}>
                       {image ? (
-                        <div className="relative aspect-[4/3] overflow-hidden rounded bg-paper-raised">
+                        <div className="slant relative aspect-[4/3] overflow-hidden bg-navy">
                           <Image
                             src={image.src}
                             alt={image.alt}
@@ -54,8 +56,8 @@ export default function ServicesPage() {
                           />
                         </div>
                       ) : (
-                        <div className="flex aspect-[4/3] items-end rounded border border-hairline-light bg-paper-raised p-8">
-                          <p className="max-w-[36ch] text-lede text-slate-dim">
+                        <div className="floor slant flex aspect-[4/3] items-end px-[calc(var(--slant)+1.5rem)] py-8">
+                          <p className="max-w-[36ch] text-lede text-slate">
                             Photography for this service is on the way. Ask and we will send recent
                             examples of the work you have in mind.
                           </p>
@@ -64,7 +66,7 @@ export default function ServicesPage() {
                     </div>
 
                     <div className={flip ? "lg:order-1" : undefined}>
-                      <h2 className="text-section text-graphite">{service.name}</h2>
+                      <h2 className="text-section">{service.name}</h2>
                       <p className="mt-4 text-lede text-slate">{service.tagline}</p>
                       <p className="mt-6 max-w-[58ch] leading-relaxed text-slate">{service.intro[0]}</p>
 
@@ -79,7 +81,7 @@ export default function ServicesPage() {
 
                       <Link
                         href={`/services/${service.slug}`}
-                        className="mt-8 inline-block text-[0.95rem] font-semibold text-cyan-deep underline-offset-4 hover:underline"
+                        className="btn btn-navy mt-8"
                       >
                         Everything about {service.shortName.toLowerCase()}
                       </Link>

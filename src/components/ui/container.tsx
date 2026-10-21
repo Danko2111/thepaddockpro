@@ -10,7 +10,7 @@ export function Container({
   wide?: boolean;
 }) {
   return (
-    <div className={cn("mx-auto w-full px-5 sm:px-8", wide ? "max-w-[110rem]" : "max-w-7xl", className)}>
+    <div className={cn("mx-auto w-full px-5 sm:px-8", wide ? "max-w-[110rem]" : "max-w-[88rem]", className)}>
       {children}
     </div>
   );

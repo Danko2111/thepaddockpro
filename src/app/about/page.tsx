@@ -59,12 +59,14 @@ export default function AboutPage() {
       <PageHero
         breadcrumbs={trail}
         title="A shop that sweats the edges"
+        image={{ src: "/gallery/colour-change/02-ford-f150-white.jpg" }}
+        imagePosition="center 60%"
         lede={`${site.name} installs colour change vinyl, paint protection film, commercial graphics, window tint and ceramic coating for customers across ${site.serviceArea.slice(0, 4).join(", ")} and the surrounding area.`}
       />
 
       <section className="concrete py-24 sm:py-28">
         <Container>
-          <div className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-20">
+          <div data-reveal className="grid gap-14 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-20">
             <div className="max-w-[64ch] space-y-6">
               {STORY.map((paragraph) => (
                 <p key={paragraph.slice(0, 32)} className="text-lede text-slate">
@@ -82,7 +84,7 @@ export default function AboutPage() {
               </ul>
               <Link
                 href="/process#materials"
-                className="mt-6 inline-block text-sm font-semibold text-cyan-deep underline-offset-4 hover:underline"
+                className="text-link mt-6 inline-block text-sm"
               >
                 Why these films
               </Link>
@@ -91,19 +93,26 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="bay border-t border-hairline py-24 sm:py-32">
+      <section className="floor py-24 sm:py-32">
         <Container>
-          <h2 className="max-w-[16ch] text-section text-chalk">Six things we do not skip</h2>
-          <p className="mt-6 max-w-[58ch] text-lede text-fog">
-            Not a mission statement. These are the specific decisions that cost us time and that you
-            would never know about if we quietly stopped making them.
-          </p>
+          <div data-reveal>
+            <h2 className="max-w-[16ch] text-section">Six things we do not skip</h2>
+            <p className="mt-6 max-w-[58ch] text-lede text-slate">
+              Not a mission statement. These are the specific decisions that cost us time and that you
+              would never know about if we quietly stopped making them.
+            </p>
+          </div>
 
-          <dl className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-            {STANDARDS.map((standard) => (
-              <div key={standard.title}>
-                <dt className="text-lg text-chalk">{standard.title}</dt>
-                <dd className="mt-3 leading-relaxed text-fog">{standard.body}</dd>
+          <dl className="mt-14 grid gap-3 md:grid-cols-2 md:gap-x-4">
+            {STANDARDS.map((standard, i) => (
+              <div
+                key={standard.title}
+                data-reveal="lay"
+                style={{ "--n": i } as React.CSSProperties}
+                className="plate h-full"
+              >
+                <dt className="text-xl font-bold tracking-[-0.02em]">{standard.title}</dt>
+                <dd className="mt-2 leading-relaxed text-slate">{standard.body}</dd>
               </div>
             ))}
           </dl>

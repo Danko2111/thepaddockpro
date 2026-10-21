@@ -1,39 +1,55 @@
 import Image from "next/image";
-import { site } from "@/config/site";
+import { hoursLine, site } from "@/config/site";
 import { Container } from "./ui/container";
 import { Cta } from "./ui/cta";
 
+/**
+ * The ask, over a full-width photograph: the phone number set big enough to
+ * read from across the room, the address and hours, and two ways in.
+ */
 export function CtaBand({
-  title = "Tell us about the car",
-  body = "Send the year, make, model and what you have in mind. Photos help. You get a realistic range back the same day, the film we would use, and how long the car would be with us.",
+  title = "Bring it to the bay",
+  body,
 }: {
   title?: string;
+  /** Sits above the address line; leave it out and the address stands alone */
   body?: string;
 }) {
   return (
-    <section className="relative isolate overflow-hidden border-t border-hairline">
-      <div className="absolute inset-0 -z-20 overflow-hidden">
-        <Image
-          src="/brand/hero-bronco.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          quality={78}
-          className="drift-slow object-cover object-[center_45%]"
-        />
-      </div>
-      <div aria-hidden className="absolute inset-0 -z-10 bg-ink/82" />
-      <div aria-hidden className="grain-layer -z-10" />
+    <section className="relative isolate overflow-hidden bg-navy text-white">
+      {/* Unsplash licence (free commercial use, no attribution required).
+          Stock, not the shop's own work: fine as an atmosphere photo here,
+          never in the gallery. Photo: Deniz Demirci. */}
+      <Image
+        src="/brand/cta-ppf-install.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="-z-20 object-cover object-[60%_55%]"
+      />
+      {/* Weighted to the copy; on phones the copy spans the frame, so shade evenly */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(13,27,46,0.92)_0%,rgba(13,27,46,0.7)_45%,rgba(13,27,46,0.35)_100%)] max-md:bg-none max-md:bg-navy/86"
+      />
 
-      <Container className="py-28 sm:py-36">
-        <div className="max-w-2xl">
-          <h2 className="text-section text-chalk">{title}</h2>
-          <p className="mt-6 max-w-[58ch] text-lede text-fog">{body}</p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-3">
+      <Container className="py-20 sm:py-36">
+        <div data-reveal>
+          <h2 className="max-w-[17ch] text-section text-white">{title}</h2>
+          <a
+            href={site.phoneHref}
+            className="mt-5 inline-block text-[clamp(2.5rem,7vw,6rem)] font-extrabold leading-none tracking-[-0.02em] tabular transition-colors hover:text-haze"
+          >
+            {site.phone}
+          </a>
+          {body && <p className="mt-6 max-w-[56ch] text-lede text-haze">{body}</p>}
+          <p className="mt-5 max-w-[52ch] text-haze">
+            {site.address.street}, {site.address.unit}, {site.address.city}. Open {hoursLine()}.
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
             <Cta href="/contact">Request a quote</Cta>
-            <Cta href={site.phoneHref} variant="line">
-              {site.phone}
+            <Cta href={site.mapsLink} variant="line">
+              Get directions
             </Cta>
           </div>
         </div>

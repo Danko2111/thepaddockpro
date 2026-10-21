@@ -1,0 +1,92 @@
+/* A service as a plate on the floor (the .plate base is in globals.css).
+   Used on the homepage and under "Other services" on each service page. */
+
+/* On hover a second layer wipes across the plate on the same slant, the way
+   film goes across a panel: a car from that service where we have one,
+   solid navy where we don't yet. */
+.service {
+  isolation: isolate;
+  display: grid;
+  gap: 0.35rem;
+  height: 100%;
+}
+
+.reveal {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-navy);
+  /* Collapsed to a sliver at the left edge, leading edge already slanted */
+  clip-path: polygon(0 0, 0 0, calc(0% - var(--slant)) 100%, 0 100%);
+  transition: clip-path 0.6s var(--ease-out-expo);
+}
+
+/* Shade over the photo so the white text holds up on any car */
+.reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(13, 27, 46, 0.9) 0%, rgba(13, 27, 46, 0.62) 50%, rgba(13, 27, 46, 0.22) 100%);
+}
+
+.revealImage {
+  object-fit: cover;
+  object-position: center 62%;
+  transform: scale(1.12);
+  transition: transform 1.2s var(--ease-out-expo);
+}
+
+.name {
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  transition: color 0.3s;
+}
+
+.line,
+.time {
+  color: var(--color-slate);
+  transition: color 0.3s;
+}
+
+.time {
+  font-size: 0.875rem;
+}
+
+@media (hover: hover) {
+  .service:hover .reveal {
+    clip-path: polygon(0 0, calc(100% + var(--slant)) 0, 100% 100%, 0 100%);
+  }
+  .service:hover .revealImage {
+    transform: scale(1);
+  }
+  .service:hover .name {
+    color: #fff;
+  }
+  .service:hover .line {
+    color: var(--color-haze);
+  }
+  .service:hover .time {
+    color: var(--color-mist);
+  }
+}
+
+/* Same treatment for keyboard focus; the ring is drawn inside because
+   clip-path would cut an outside one off */
+.service:focus-visible {
+  outline: none;
+}
+.service:focus-visible .reveal {
+  clip-path: polygon(0 0, calc(100% + var(--slant)) 0, 100% 100%, 0 100%);
+  box-shadow: inset 0 0 0 3px #fff;
+}
+.service:focus-visible .name {
+  color: #fff;
+}
+.service:focus-visible .line {
+  color: var(--color-haze);
+}
+.service:focus-visible .time {
+  color: var(--color-mist);
+}

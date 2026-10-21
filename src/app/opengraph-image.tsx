@@ -19,7 +19,7 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #15202a 0%, #08080a 52%, #0b1c28 100%)",
+          background: "linear-gradient(135deg, #1d3354 0%, #0d1b2e 52%, #08121f 100%)",
           padding: 72,
           fontFamily: "sans-serif",
         }}
@@ -31,7 +31,7 @@ export default function OpengraphImage() {
               fontSize: 30,
               letterSpacing: 8,
               textTransform: "uppercase",
-              color: "#f5f5f7",
+              color: "#ffffff",
               fontWeight: 800,
             }}
           >
@@ -47,7 +47,7 @@ export default function OpengraphImage() {
               fontWeight: 800,
               letterSpacing: -3,
               textTransform: "uppercase",
-              color: "#f5f5f7",
+              color: "#ffffff",
               display: "flex",
               flexDirection: "column",
             }}
@@ -58,7 +58,7 @@ export default function OpengraphImage() {
             </span>
             <span>standard</span>
           </div>
-          <div style={{ marginTop: 28, fontSize: 26, color: "#8b8b9a", display: "flex" }}>
+          <div style={{ marginTop: 28, fontSize: 26, color: "#b9c3d1", display: "flex" }}>
             Wraps · PPF · Fleet · Tint · Ceramic · {cityRegion}
           </div>
         </div>
@@ -67,12 +67,12 @@ export default function OpengraphImage() {
           style={{
             display: "flex",
             justifyContent: "space-between",
-            borderTop: "1px solid #24242e",
+            borderTop: "1px solid #263a57",
             paddingTop: 26,
             fontSize: 22,
             letterSpacing: 4,
             textTransform: "uppercase",
-            color: "#5e5e6c",
+            color: "#8e9bb0",
           }}
         >
           <span>3M · Avery Dennison · Inozetek</span>

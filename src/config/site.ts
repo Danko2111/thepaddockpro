@@ -125,3 +125,13 @@ export const fullAddress = [
   .join(", ");
 
 export const cityRegion = `${site.address.city}, ${site.address.region}`;
+
+/** "Monday to Saturday, 8 am to 5 pm", derived from the first hours block */
+export function hoursLine() {
+  const [block] = site.hours;
+  const hour = (t: string) => {
+    const h = Number(t.slice(0, 2));
+    return `${h % 12 || 12} ${h < 12 ? "am" : "pm"}`;
+  };
+  return `${block.days[0]} to ${block.days[block.days.length - 1]}, ${hour(block.opens)} to ${hour(block.closes)}`;
+}

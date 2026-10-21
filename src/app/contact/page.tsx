@@ -35,6 +35,8 @@ export default function ContactPage() {
         breadcrumbs={trail}
         title="Tell us about the vehicle"
         lede="The more you give us up front, the closer the first number is to the final one. Every enquiry is read by a person, and we normally reply within one business day."
+        image={{ src: "/brand/hero-shop-lineup.jpg" }}
+        imagePosition="center 70%"
       />
 
       <section className="bay py-16 sm:py-24">
@@ -46,16 +48,16 @@ export default function ContactPage() {
 
             <aside className="space-y-10 lg:border-l lg:border-hairline lg:pl-10">
               <div>
-                <h2 className="text-sm font-semibold text-chalk">Rather just call</h2>
+                <h2 className="text-sm font-bold tracking-normal text-white">Rather just call</h2>
                 <a
                   href={site.phoneHref}
-                  className="mt-4 block text-3xl tabular text-chalk transition-colors hover:text-cyan"
+                  className="mt-3 block text-3xl font-extrabold tracking-[-0.02em] tabular transition-colors hover:text-haze"
                 >
                   {site.phone}
                 </a>
                 <a
                   href={`mailto:${site.email}`}
-                  className="mt-3 block text-sm text-fog transition-colors hover:text-cyan"
+                  className="mt-3 block text-sm text-mist transition-colors hover:text-white"
                 >
                   {site.email}
                 </a>
@@ -63,7 +65,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold text-chalk">The shop</h2>
+                <h2 className="text-sm font-bold tracking-normal text-white">The shop</h2>
                 <address className="mt-4 space-y-1 text-sm not-italic leading-relaxed text-fog">
                   <div className="text-chalk">
                     {site.address.street}
@@ -78,7 +80,7 @@ export default function ContactPage() {
                     href={site.mapsLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-4 inline-block text-sm font-semibold text-cyan underline-offset-4 hover:underline"
+                    className="text-link mt-4 inline-block text-sm"
                   >
                     Directions
                   </a>
@@ -86,7 +88,7 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold text-chalk">Hours</h2>
+                <h2 className="text-sm font-bold tracking-normal text-white">Hours</h2>
                 <dl className="mt-4 space-y-2 text-sm">
                   {site.hours.map((row) => (
                     <div key={row.days.join()} className="flex justify-between gap-4 border-b border-hairline pb-2">
@@ -110,18 +112,18 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <h2 className="text-sm font-semibold text-chalk">Service area</h2>
+                <h2 className="text-sm font-bold tracking-normal text-white">Service area</h2>
                 <p className="mt-4 text-sm leading-relaxed text-fog">
                   {site.serviceArea.join(" · ")} and the surrounding area. Commercial fleets collected and
                   returned by arrangement.
                 </p>
               </div>
 
-              <div className="border-l-2 border-cyan bg-steel p-6">
-                <h2 className="text-sm font-semibold text-chalk">Photos help</h2>
+              <div className="rounded-2xl border border-white/10 bg-navy-2 p-6">
+                <h2 className="text-sm font-bold tracking-normal text-white">Photos help</h2>
                 <p className="mt-3 text-sm leading-relaxed text-fog">
-                  Reply to your confirmation email with a three-quarter front, a straight side, and close-ups
-                  of any damage or previous paintwork. It is the difference between a range and a firm price.
+                  Add a three-quarter front, a straight side, and close-ups of any damage or previous paintwork
+                  to the form. It is the difference between a range and a firm price.
                 </p>
               </div>
             </aside>

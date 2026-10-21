@@ -26,9 +26,11 @@ export default function ProcessPage() {
         breadcrumbs={trail}
         title="Seven stages, no shortcuts"
         lede="Most of what decides whether a wrap lasts happens before any film comes off the roll. Here is the whole sequence, including the parts customers never see."
+        image={{ src: "/gallery/ceramic-coating/01-acura-nsx-gloss-black-ceramic-coating.jpg" }}
+        imagePosition="center 60%"
       />
 
-      {/* Light, sticky rail. These steps are a genuine sequence, so they are numbered. */}
+      {/* Wall, sticky rail. These steps are a genuine sequence, so they are numbered. */}
       <section className="concrete py-24 sm:py-32">
         <Container>
           <div className="grid gap-16 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-20">
@@ -39,12 +41,12 @@ export default function ProcessPage() {
 
             <ol className="space-y-px bg-hairline-light">
               {processSteps.map((step, i) => (
-                <li key={step.index} id={`step-${i + 1}`} className="scroll-mt-28 bg-paper">
+                <li key={step.index} id={`step-${i + 1}`} data-reveal className="scroll-mt-28 bg-wall">
                   <article className="grid gap-6 py-10 lg:grid-cols-[3rem_minmax(0,1fr)_13rem] lg:gap-8">
-                    <span className="text-2xl tabular text-slate-dim">{step.index}</span>
+                    <span className="text-2xl font-extrabold tabular text-cyan-deep">{step.index}</span>
 
                     <div>
-                      <h2 className="text-2xl text-graphite">{step.title}</h2>
+                      <h2 className="text-2xl tracking-[-0.02em]">{step.title}</h2>
                       <p className="mt-4 max-w-[56ch] leading-relaxed text-slate">{step.body}</p>
                     </div>
 
@@ -62,31 +64,34 @@ export default function ProcessPage() {
         </Container>
       </section>
 
-      {/* Dark, typographic */}
-      <section id="materials" className="bay scroll-mt-24 border-t border-hairline py-24 sm:py-32">
+      {/* Navy, typographic */}
+      <section id="materials" className="bay scroll-mt-24 py-24 sm:py-32">
         <Container>
-          <h2 className="max-w-[18ch] text-section text-chalk">Why 3M, Avery and Inozetek</h2>
-          <p className="mt-6 max-w-[62ch] text-lede text-fog">
-            Film is a minority of what a wrap costs — labour is the rest. Saving a few hundred dollars
-            on material buys a job that has to be redone in two years, at full labour price. We only
-            install cast film from houses that stand behind it.
-          </p>
+          <div data-reveal>
+            <h2 className="max-w-[18ch] text-section">Why 3M, Avery and Inozetek</h2>
+            <p className="mt-6 max-w-[62ch] text-lede text-haze">
+              Film is a minority of what a wrap costs — labour is the rest. Saving a few hundred dollars
+              on material buys a job that has to be redone in two years, at full labour price. We only
+              install cast film from houses that stand behind it.
+            </p>
 
-          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-fog">
-            {site.credentials.map((credential) => (
-              <li key={credential}>{credential}</li>
-            ))}
-          </ul>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-fog">
+              {site.credentials.map((credential) => (
+                <li key={credential}>{credential}</li>
+              ))}
+            </ul>
+          </div>
 
           <dl className="mt-16 divide-y divide-hairline border-y border-hairline">
             {materials.map((material) => (
               <div
                 key={material.brand}
+                data-reveal
                 className="grid gap-6 py-12 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16"
               >
                 <dt>
-                  <span className="block text-4xl text-chalk sm:text-5xl">{material.brand}</span>
-                  <span className="mt-3 block text-sm text-cyan">{material.line}</span>
+                  <span className="block text-4xl font-extrabold tracking-[-0.02em] sm:text-5xl">{material.brand}</span>
+                  <span className="mt-3 block text-sm font-semibold text-cyan-hot">{material.line}</span>
                   <span className="mt-4 block text-sm text-fog-dim">{material.positioning}</span>
                 </dt>
                 <dd>
@@ -107,19 +112,26 @@ export default function ProcessPage() {
         </Container>
       </section>
 
-      {/* Light again */}
-      <section id="aftercare" className="concrete scroll-mt-24 py-24 sm:py-32">
+      {/* Floor: aftercare, as plates */}
+      <section id="aftercare" className="floor scroll-mt-24 py-24 sm:py-32">
         <Container>
-          <h2 className="text-section text-graphite">Keeping it tight</h2>
-          <p className="mt-6 max-w-[58ch] text-lede text-slate">
-            A wrap is a finish, not a force field. Look after it the way you would look after paint and
-            you get the full life out of it.
-          </p>
+          <div data-reveal>
+            <h2 className="text-section">Keeping it tight</h2>
+            <p className="mt-6 max-w-[58ch] text-lede text-slate">
+              A wrap is a finish, not a force field. Look after it the way you would look after paint and
+              you get the full life out of it.
+            </p>
+          </div>
 
-          <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {aftercare.map((item) => (
-              <li key={item.title} className="rounded border border-hairline-light bg-paper-raised p-7">
-                <h3 className="text-lg text-graphite">{item.title}</h3>
+          <ul className="mt-14 grid gap-3 md:grid-cols-2 md:gap-x-4">
+            {aftercare.map((item, i) => (
+              <li
+                key={item.title}
+                data-reveal="lay"
+                style={{ "--n": i } as React.CSSProperties}
+                className="plate h-full"
+              >
+                <h3 className="text-xl tracking-[-0.02em]">{item.title}</h3>
                 <p className="mt-3 leading-relaxed text-slate">{item.body}</p>
               </li>
             ))}

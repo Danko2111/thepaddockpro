@@ -1,25 +1,29 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Geist } from "next/font/google";
+import { Barlow_Condensed, DM_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { RevealOnce } from "@/components/reveal-once";
 import { site } from "@/config/site";
 import { JsonLd, localBusinessSchema, websiteSchema } from "@/lib/schema";
 import { warnOnPlaceholders } from "@/lib/seo";
 import "./globals.css";
 
 /**
- * Archivo's width axis, run wide rather than condensed. Condensed grotesk is
- * the motorsport default; the lettering actually painted on this shop's wall is
- * wide, heavy and squared, so that is what the display face does here.
+ * DM Sans is the only face on the site. Low-contrast and geometric; the
+ * optical-size axis tightens the display sizes and opens up the small text on
+ * its own.
  */
-const archivo = Archivo({
+const dmSans = DM_Sans({ subsets: ["latin"], axes: ["opsz"], variable: "--font-dm-sans", display: "swap" });
+
+/** Homepage slogan only: squared, slanted condensed caps that echo the
+    PADDOCK PRO lettering on the shop wall */
+const slogan = Barlow_Condensed({
   subsets: ["latin"],
-  variable: "--font-display",
-  axes: ["wdth"],
+  weight: "800",
+  style: "italic",
+  variable: "--font-slogan",
   display: "swap",
 });
-
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -37,7 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#08080a",
+  themeColor: "#0d1b2e",
   colorScheme: "dark",
 };
 
@@ -47,12 +51,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${geist.variable} h-full antialiased`}
+      className={`${dmSans.variable} ${slogan.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-ink text-chalk">
+      <body className="flex min-h-full flex-col bg-navy text-chalk">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-cyan focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-cyan-ink"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-wall focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-navy"
         >
           Skip to content
         </a>
@@ -62,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
+        <RevealOnce />
 
         <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
       </body>

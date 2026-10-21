@@ -59,7 +59,7 @@ export function GalleryGrid({
   return (
     <>
       {/* Filters */}
-      <div className="flex flex-wrap gap-2 border-y border-hairline py-4" role="group" aria-label="Filter work by service">
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Filter work by service">
         {categories.map((category) => {
           const isActive = active === category.key;
           return (
@@ -69,14 +69,14 @@ export function GalleryGrid({
               onClick={() => setActive(category.key)}
               aria-pressed={isActive}
               className={cn(
-                "flex items-center gap-2.5 border px-4 py-2.5 text-sm font-medium transition-colors",
+                "flex items-center gap-2.5 rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-navy",
                 isActive
-                  ? "border-cyan bg-cyan text-cyan-ink"
-                  : "border-hairline text-fog hover:border-hairline-strong hover:text-chalk",
+                  ? "border-navy bg-navy text-white"
+                  : "border-navy/25 bg-plate/60 text-navy hover:border-navy/60 hover:bg-plate",
               )}
             >
               {category.label}
-              <span className={cn("tabular text-xs", isActive ? "text-cyan-ink/70" : "text-fog-dim")}>
+              <span className={cn("tabular text-xs", isActive ? "text-mist" : "text-slate")}>
                 {category.count}
               </span>
             </button>
@@ -84,20 +84,21 @@ export function GalleryGrid({
         })}
       </div>
 
-      {/* Masonry via CSS columns — no layout JS, no CLS */}
-      <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4">
+      {/* Masonry via CSS columns — no layout JS, no CLS. Hovering one frame
+          dims the rest, as on the homepage. */}
+      <div className="mt-8 columns-1 gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4 [@media(hover:hover)]:[&:has(figure:hover)>figure:not(:hover)]:opacity-45 [@media(hover:hover)]:[&:has(figure:hover)>figure:not(:hover)]:grayscale-[0.7]">
         {images.map((image, i) => {
           const shown = active === "all" || image.category === active;
           return (
             <figure
               key={image.src}
-              className={cn("break-inside-avoid", !shown && "hidden")}
+              className={cn("break-inside-avoid transition-[opacity,filter] duration-400", !shown && "hidden")}
               aria-hidden={!shown}
             >
               <button
                 type="button"
                 onClick={() => setLightbox(i)}
-                className="group relative block w-full overflow-hidden bg-steel text-left"
+                className="group relative block w-full overflow-hidden bg-navy text-left focus-visible:outline-navy"
               >
                 <Image
                   src={image.src}
@@ -107,18 +108,15 @@ export function GalleryGrid({
                   placeholder="blur"
                   blurDataURL={image.blurDataURL}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  className="w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+                  className="w-full scale-[1.04] transition-transform duration-1000 ease-out-expo group-hover:scale-100 group-focus-visible:scale-100"
                 />
-                <span
-                  aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-95"
-                />
-                <figcaption className="absolute inset-x-0 bottom-0 translate-y-2 p-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                  <span className="text-lg leading-tight text-chalk">
+                {/* A navy plate cut on a slant rises over the foot of the photo */}
+                <figcaption className="absolute inset-x-0 bottom-0 grid translate-y-[101%] gap-0.5 bg-navy/94 px-5 pb-5 pt-9 transition-transform duration-600 ease-out-expo [clip-path:polygon(0_1.4rem,100%_0,100%_100%,0_100%)] group-hover:translate-y-0 group-focus-visible:translate-y-0">
+                  <span className="text-lg font-bold leading-tight tracking-[-0.015em] text-white">
                     {image.title}
                   </span>
                   {image.caption && (
-                    <span className="mt-1 block text-xs leading-snug text-fog">{image.caption}</span>
+                    <span className="text-sm leading-snug text-haze">{image.caption}</span>
                   )}
                 </figcaption>
               </button>
@@ -128,7 +126,7 @@ export function GalleryGrid({
       </div>
 
       {visible.length === 0 && (
-        <p className="py-20 text-center text-fog">No work in this category yet.</p>
+        <p className="py-20 text-center text-slate">No work in this category yet.</p>
       )}
 
       {/* Lightbox */}
@@ -137,21 +135,21 @@ export function GalleryGrid({
           role="dialog"
           aria-modal="true"
           aria-label={current.title}
-          className="fixed inset-0 z-[60] flex flex-col bg-ink/97 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex flex-col bg-navy/97 backdrop-blur-sm"
           onClick={() => setLightbox(null)}
         >
-          <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
-            <p className="text-sm text-fog">
-              <span className="text-cyan">{String(visible.findIndex((v) => v.i === lightbox) + 1).padStart(2, "0")}</span>
+          <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            <p className="text-sm text-mist">
+              <span className="font-semibold text-white">{String(visible.findIndex((v) => v.i === lightbox) + 1).padStart(2, "0")}</span>
               {" / "}
               {String(visible.length).padStart(2, "0")}
             </p>
             <button
               type="button"
               onClick={() => setLightbox(null)}
-              className="border border-hairline px-4 py-2 text-sm text-chalk transition-colors hover:border-cyan hover:text-cyan"
+              className="pill-ring rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/5"
             >
-              Close ✕
+              Close
             </button>
           </div>
 
@@ -171,24 +169,24 @@ export function GalleryGrid({
           </div>
 
           <div
-            className="flex items-center justify-between gap-4 border-t border-hairline px-5 py-4"
+            className="flex items-center justify-between gap-4 border-t border-white/10 px-5 py-4"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => step(-1)}
-              className="px-3 py-2 text-sm text-fog transition-colors hover:text-chalk"
+              className="pill-ring rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/5"
             >
               ← Prev
             </button>
             <div className="min-w-0 text-center">
-              <p className="truncate text-base text-chalk">{current.title}</p>
-              {current.caption && <p className="truncate text-xs text-fog">{current.caption}</p>}
+              <p className="truncate text-base font-bold text-white">{current.title}</p>
+              {current.caption && <p className="truncate text-sm text-mist">{current.caption}</p>}
             </div>
             <button
               type="button"
               onClick={() => step(1)}
-              className="px-3 py-2 text-sm text-fog transition-colors hover:text-chalk"
+              className="pill-ring rounded-full border border-white/30 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/5"
             >
               Next →
             </button>

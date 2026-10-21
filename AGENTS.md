@@ -33,8 +33,18 @@ edit the generated file — use `src/data/gallery-overrides.json`.
 and a breadcrumb is incomplete.
 
 **Keep it static.** Every route prerenders. Server Components by default; the
-only Client Components are the header, the gallery grid and the quote form.
-Don't add a client boundary without a reason that survives scrutiny.
+only Client Components are the header, the gallery grid, the quote form,
+`RevealOnce` (renders nothing; marks `[data-reveal]` elements as they first
+scroll into view) and `AnimatedDetails` (a real `<details>` whose open and
+close are animated; content stays in the server HTML). Don't add a client boundary without a reason that survives
+scrutiny.
+
+**One design system, in `src/app/globals.css`.** Navy and wall-white, DM Sans
+only. Use the shared pieces rather than restyling per page: `.btn` pills
+(`btn-light`/`btn-ghost` on navy, `btn-navy`/`btn-outline` on light, or the
+`Cta` component), `floor` for the speckled light ground, `.plate` for slanted
+cards on it, `slant` for photo frames, `PageHero` and `CtaBand` to open and
+close a page, and `data-reveal` for a one-time entrance on scroll.
 
 **Canadian English** throughout the copy — colour, neighbourhood, behaviour,
 with -ize endings. The shop is in Langley, BC. Note the exceptions: CSS

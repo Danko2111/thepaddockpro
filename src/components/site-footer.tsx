@@ -24,28 +24,28 @@ export function SiteFooter() {
   const socials = Object.entries(site.social).filter(([, url]) => url);
 
   return (
-    <footer className="border-t border-hairline bg-asphalt">
+    <footer className="border-t border-white/10 bg-navy-deep">
       <Container className="py-16 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.1fr]">
           {/* Canonical NAP — must match the Google Business Profile exactly */}
           <div>
             <div className="flex items-center gap-3">
               <Image src="/brand/logo.png" alt="" width={150} height={150} className="h-10 w-10 object-contain" />
-              <span className="text-base uppercase tracking-[0.04em] text-chalk">Paddock&nbsp;Pro</span>
+              <span className="text-base font-bold uppercase tracking-[0.04em] text-chalk">Paddock&nbsp;Pro</span>
             </div>
 
-            <address className="mt-7 space-y-1 text-sm not-italic leading-relaxed text-fog">
+            <address className="mt-7 space-y-1 text-sm not-italic leading-relaxed text-mist">
               <div className="text-chalk">
                 {site.address.street}{site.address.unit && `, ${site.address.unit}`}
               </div>
               <div>{site.address.city}, {site.address.region} {site.address.postalCode}</div>
               <div className="pt-3">
-                <a href={site.phoneHref} className="text-chalk transition-colors hover:text-cyan">
+                <a href={site.phoneHref} className="text-chalk transition-colors hover:text-white">
                   {site.phone}
                 </a>
               </div>
               <div>
-                <a href={`mailto:${site.email}`} className="transition-colors hover:text-cyan">
+                <a href={`mailto:${site.email}`} className="transition-colors hover:text-white">
                   {site.email}
                 </a>
               </div>
@@ -61,7 +61,7 @@ export function SiteFooter() {
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-fog capitalize underline-offset-4 transition-colors hover:text-cyan hover:underline"
+                      className="text-mist capitalize underline-offset-4 transition-colors hover:text-white hover:underline"
                     >
                       {name}
                     </a>
@@ -73,11 +73,11 @@ export function SiteFooter() {
 
           {footerNav.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
-              <h2 className="text-sm font-semibold text-chalk">{column.heading}</h2>
+              <h2 className="text-sm font-bold text-white">{column.heading}</h2>
               <ul className="mt-5 space-y-3">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className="text-sm text-fog transition-colors hover:text-chalk">
+                    <Link href={link.href} className="text-sm text-mist transition-colors hover:text-white">
                       {link.label}
                     </Link>
                   </li>
@@ -87,11 +87,11 @@ export function SiteFooter() {
           ))}
 
           <div>
-            <h2 className="text-sm font-semibold text-chalk">Opening hours</h2>
+            <h2 className="text-sm font-bold text-white">Opening hours</h2>
             <dl className="mt-5 space-y-2 text-sm">
               {site.hours.map((row) => (
                 <div key={row.days.join()} className="flex justify-between gap-4">
-                  <dt className="text-fog">{formatDays(row.days)}</dt>
+                  <dt className="text-mist">{formatDays(row.days)}</dt>
                   <dd className="tabular text-chalk">
                     {formatTime(row.opens)} – {formatTime(row.closes)}
                   </dd>
@@ -99,22 +99,22 @@ export function SiteFooter() {
               ))}
               {site.closedDays.map((day) => (
                 <div key={day} className="flex justify-between gap-4">
-                  <dt className="text-fog">{DAY_ABBR[day]}</dt>
-                  <dd className="text-fog-dim">Closed</dd>
+                  <dt className="text-mist">{DAY_ABBR[day]}</dt>
+                  <dd className="text-mist/70">Closed</dd>
                 </div>
               ))}
             </dl>
 
             <Link
               href="/contact"
-              className="mt-7 inline-flex bg-cyan px-5 py-3.5 text-sm font-semibold text-cyan-ink transition-colors hover:bg-cyan-hot"
+              className="pill-ring mt-7 inline-flex rounded-full bg-wall px-5 py-3.5 text-sm font-semibold text-navy transition-colors hover:bg-white"
             >
               Request a quote
             </Link>
           </div>
         </div>
 
-        <p className="mt-16 border-t border-hairline pt-8 text-sm text-fog-dim">
+        <p className="mt-16 border-t border-white/10 pt-8 text-sm text-mist/70">
           © {new Date().getFullYear()} {site.legalName}, {fullAddress}
         </p>
       </Container>

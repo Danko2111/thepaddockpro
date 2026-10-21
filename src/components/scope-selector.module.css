@@ -1,0 +1,146 @@
+/* "Choose the scope" on each service page: the scopes as a list of pills,
+   the chosen one open in a panel. Plain radio buttons and :has(), so it
+   works without JavaScript and every option stays in the HTML. */
+
+.selector {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .selector {
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 4px;
+  margin: -4px;
+}
+
+@media (min-width: 900px) {
+  .tabs {
+    flex-direction: column;
+    overflow: visible;
+  }
+}
+
+.tab {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  border: 1px solid rgba(238, 241, 244, 0.18);
+  border-radius: 999px;
+  font-weight: 650;
+  color: var(--color-haze);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  border-color: rgba(238, 241, 244, 0.45);
+  color: #fff;
+}
+
+.tab:has(input:checked) {
+  background: var(--color-wall);
+  border-color: var(--color-wall);
+  color: var(--color-navy);
+}
+
+.tab:has(input:focus-visible) {
+  outline: 2px solid var(--color-cyan-hot);
+  outline-offset: 3px;
+}
+
+/* An arrow pointing at the panel, on the selected tab, wide screens only */
+@media (min-width: 900px) {
+  .tab:has(input:checked)::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-top: 2px solid currentColor;
+    border-right: 2px solid currentColor;
+    transform: rotate(45deg);
+  }
+}
+
+.panels {
+  position: relative;
+}
+
+.panel {
+  display: none;
+  min-height: 100%;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(34, 180, 232, 0.16), transparent 60%),
+    var(--color-navy-2);
+  border: 1px solid rgba(238, 241, 244, 0.1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .panel {
+    animation: panel-in 0.5s var(--ease-out-expo);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+.panelName {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.panelDetail {
+  margin-top: 1.25rem;
+  max-width: 50ch;
+  font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+  color: var(--color-haze);
+}
+
+/* Show the panel for whichever tab is checked; covers up to ten scopes */
+.selector:has(.tab:nth-child(1) input:checked) .panel:nth-child(1) {
+  display: block;
+}
+.selector:has(.tab:nth-child(2) input:checked) .panel:nth-child(2) {
+  display: block;
+}
+.selector:has(.tab:nth-child(3) input:checked) .panel:nth-child(3) {
+  display: block;
+}
+.selector:has(.tab:nth-child(4) input:checked) .panel:nth-child(4) {
+  display: block;
+}
+.selector:has(.tab:nth-child(5) input:checked) .panel:nth-child(5) {
+  display: block;
+}
+.selector:has(.tab:nth-child(6) input:checked) .panel:nth-child(6) {
+  display: block;
+}
+.selector:has(.tab:nth-child(7) input:checked) .panel:nth-child(7) {
+  display: block;
+}
+.selector:has(.tab:nth-child(8) input:checked) .panel:nth-child(8) {
+  display: block;
+}
+.selector:has(.tab:nth-child(9) input:checked) .panel:nth-child(9) {
+  display: block;
+}
+.selector:has(.tab:nth-child(10) input:checked) .panel:nth-child(10) {
+  display: block;
+}
