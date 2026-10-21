@@ -16,7 +16,7 @@ function shell(title: string, body: string) {
 <title>${esc(title)}</title></head>
 <body style="margin:0;padding:24px 12px;background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#18181b;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e4e4e7;">
-    <tr><td style="height:5px;background:#22b4e8;"></td></tr>
+    <tr><td style="height:5px;background:#1a92d8;"></td></tr>
     <tr><td style="padding:28px 32px 8px;">
       <p style="margin:0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#71717a;">${esc(site.name)}</p>
       <h1 style="margin:10px 0 0;font-size:22px;line-height:1.2;color:#18181b;">${esc(title)}</h1>

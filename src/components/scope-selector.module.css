@@ -49,7 +49,7 @@
   color: #fff;
 }
 
-/* Navy on logo cyan is 6.8:1 */
+/* Navy on the logo blue is 5.1:1 */
 .tab:has(input:checked) {
   background: var(--color-cyan);
   border-color: var(--color-cyan);
@@ -83,7 +83,7 @@
   padding: clamp(2rem, 4vw, 3.5rem);
   border-radius: 1.5rem;
   background:
-    radial-gradient(120% 90% at 100% 0%, rgba(34, 180, 232, 0.16), transparent 60%),
+    radial-gradient(120% 90% at 100% 0%, rgba(26, 146, 216, 0.18), transparent 60%),
     var(--color-navy-2);
   border: 1px solid rgba(238, 241, 244, 0.1);
 }

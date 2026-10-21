@@ -25,7 +25,7 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ width: 14, height: 52, background: "#22b4e8" }} />
+          <div style={{ width: 14, height: 52, background: "#1a92d8" }} />
           <div
             style={{
               fontSize: 30,
@@ -54,7 +54,7 @@ export default function OpengraphImage() {
           >
             <span>Vehicle wraps</span>
             <span>
-              built to <span style={{ color: "#22b4e8" }}>paddock</span>
+              built to <span style={{ color: "#1a92d8" }}>paddock</span>
             </span>
             <span>standard</span>
           </div>

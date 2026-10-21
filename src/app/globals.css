@@ -27,12 +27,14 @@
   --color-floor: #c5cad1;     /* epoxy flake, under the .floor texture */
   --color-plate: #fbfcfd;
 
-  /* ── Accent: sampled from the logo ─────────────────────────────────── */
-  --color-cyan: #22b4e8;
-  --color-cyan-hot: #54c7f2;
-  /* On wall, #22b4e8 is 2.4:1 and unreadable. This is 6.2:1. */
+  /* ── Accent: the logo's ocean blue, between the bright highlight on the
+     lettering (#22b4e8) and its deeper body (#1878cc). 5.1:1 on navy. ── */
+  --color-cyan: #1a92d8;
+  /* Lighter partner for small text and the button ring on navy: 6.7:1 */
+  --color-cyan-hot: #45aae6;
+  /* On wall, the accent is 3:1, too faint for body text. This is 6.2:1. */
   --color-cyan-deep: #1460a9;
-  /* On a cyan fill, white is 2.4:1. This is 7.6:1. */
+  /* On a cyan fill, white is 3.4:1. This is 5.4:1. */
   --color-cyan-ink: #04161e;
 
   /* ── Role names. Older markup speaks in these; they all resolve to the
@@ -203,13 +205,13 @@
 @property --head {
   syntax: "<color>";
   inherits: false;
-  initial-value: rgb(84, 199, 242);
+  initial-value: rgb(69, 170, 230);
 }
 
 @layer components {
   .pill-ring,
   .btn {
-    --ring: rgb(84, 199, 242);
+    --ring: rgb(69, 170, 230);
     --ring-head: #fff;
     position: relative;
     isolation: isolate;
@@ -378,10 +380,10 @@
 
   /* Logo cyan with a soft glow, like the lit sign. For the one word in a
      headline the line turns on, on navy or a shaded photo only: on wall
-     and floor this cyan is too faint to read (2.4:1). */
+     and floor this blue is too faint to read (3:1). */
   .accent {
     color: var(--color-cyan);
-    text-shadow: 0 0 0.35em rgba(34, 180, 232, 0.45);
+    text-shadow: 0 0 0.35em rgba(26, 146, 216, 0.5);
   }
 
   /* Underlined text link that thickens on hover */
