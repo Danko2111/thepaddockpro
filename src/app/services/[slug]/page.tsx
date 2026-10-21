@@ -93,10 +93,10 @@ export default async function ServicePage({ params }: PageProps<"/services/[slug
       <section className="bay py-24 sm:py-28">
         <Container>
           <div data-reveal>
-            <h2 className="text-section">Choose the scope</h2>
+            <h2 className="text-section">Pick your starting point</h2>
             <p className="mt-5 max-w-[58ch] text-lede text-haze">
-              What differs between these is coverage and material. The preparation underneath does not
-              change.
+              Same prep on every one of these: trim off, paint cleaned, every edge heated down. What
+              changes is what goes on the car and how much of it gets covered.
             </p>
           </div>
           <div data-reveal className="mt-12">
