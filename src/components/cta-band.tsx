@@ -38,7 +38,7 @@ export function CtaBand({
           <h2 className="max-w-[17ch] text-section text-white">{title}</h2>
           <a
             href={site.phoneHref}
-            className="accent mt-5 inline-block text-[clamp(2.5rem,7vw,6rem)] font-extrabold leading-none tracking-[-0.02em] tabular transition-colors hover:text-cyan-hot"
+            className="mt-5 inline-block text-[clamp(2.5rem,7vw,6rem)] font-extrabold leading-none tracking-[-0.02em] text-white tabular transition-colors hover:text-haze"
           >
             {site.phone}
           </a>
