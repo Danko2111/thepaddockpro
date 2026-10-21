@@ -49,9 +49,10 @@
   color: #fff;
 }
 
+/* Navy on logo cyan is 6.8:1 */
 .tab:has(input:checked) {
-  background: var(--color-wall);
-  border-color: var(--color-wall);
+  background: var(--color-cyan);
+  border-color: var(--color-cyan);
   color: var(--color-navy);
 }
 

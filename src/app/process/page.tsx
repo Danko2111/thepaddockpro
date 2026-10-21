@@ -24,7 +24,7 @@ export default function ProcessPage() {
     <>
       <PageHero
         breadcrumbs={trail}
-        title="Seven stages, no shortcuts"
+        title={<>Seven stages, no <span className="accent">shortcuts</span></>}
         lede="Most of what decides whether a wrap lasts happens before any film comes off the roll. Here is the whole sequence, including the parts customers never see."
         image={{ src: "/gallery/ceramic-coating/01-acura-nsx-gloss-black-ceramic-coating.jpg" }}
         imagePosition="center 60%"

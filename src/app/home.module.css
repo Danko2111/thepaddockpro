@@ -85,11 +85,6 @@
   max-width: 13ch;
 }
 
-/* The two words the promise turns on, in the logo's cyan, lit like the sign */
-.brand {
-  color: var(--color-cyan);
-  text-shadow: 0 0 0.35em rgba(34, 180, 232, 0.45);
-}
 
 .heroLede {
   margin-top: 1.75rem;

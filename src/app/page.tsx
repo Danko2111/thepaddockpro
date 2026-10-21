@@ -59,11 +59,11 @@ export default function HomePage() {
             {/* One idea per line: the two cyan words each get a line to themselves */}
             Change the
             <br />
-            <span className={s.brand}>colour</span>.
+            <span className="accent">colour</span>.
             <br />
             Keep the
             <br />
-            <span className={s.brand}>paint</span>.
+            <span className="accent">paint</span>.
           </h1>
           <p className={`${s.heroLede} load`} style={{ "--n": 1 } as React.CSSProperties}>
             Colour change wraps, paint protection film, fleet graphics, tint and ceramic coating
@@ -155,7 +155,7 @@ export default function HomePage() {
         <div className={`${s.inner} ${s.samplesGrid}`}>
           <div>
             <h2 className="max-w-[17ch] text-section" data-reveal>
-              See every finish in daylight first
+              See every finish in <span className="accent">daylight</span> first
             </h2>
             {samples && (
               <p className={s.samplesBody} data-reveal>

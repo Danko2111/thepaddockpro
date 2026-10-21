@@ -33,7 +33,7 @@ export default function ContactPage() {
     <>
       <PageHero
         breadcrumbs={trail}
-        title="Tell us about the vehicle"
+        title={<>Tell us about the <span className="accent">vehicle</span></>}
         lede="The more you give us up front, the closer the first number is to the final one. Every enquiry is read by a person, and we normally reply within one business day."
         image={{ src: "/brand/hero-shop-lineup.jpg" }}
         imagePosition="center 70%"

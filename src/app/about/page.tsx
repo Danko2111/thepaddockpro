@@ -58,7 +58,7 @@ export default function AboutPage() {
     <>
       <PageHero
         breadcrumbs={trail}
-        title="A shop that sweats the edges"
+        title={<>A shop that sweats the <span className="accent">edges</span></>}
         image={{ src: "/gallery/colour-change/02-ford-f150-white.jpg" }}
         imagePosition="center 60%"
         lede={`${site.name} installs colour change vinyl, paint protection film, commercial graphics, window tint and ceramic coating for customers across ${site.serviceArea.slice(0, 4).join(", ")} and the surrounding area.`}

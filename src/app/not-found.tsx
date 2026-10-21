@@ -12,7 +12,7 @@ export default function NotFound() {
         <p className="load text-sm font-semibold text-cyan-hot">Error 404</p>
 
         <h1 className="load mt-5 max-w-[14ch] text-hero" style={{ "--n": 1 } as React.CSSProperties}>
-          Wrong pit box
+          Wrong <span className="accent">pit box</span>
         </h1>
         <p className="load mt-6 max-w-lg text-lede text-haze" style={{ "--n": 2 } as React.CSSProperties}>
           That page does not exist. Here is everything that does.

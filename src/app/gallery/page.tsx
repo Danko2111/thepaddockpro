@@ -24,7 +24,7 @@ export default function GalleryPage() {
       <PageHero
         eyebrow={`${galleryCount} projects`}
         breadcrumbs={trail}
-        title="Work that left the bay"
+        title={<>Work that left the <span className="accent">bay</span></>}
         lede="Every car here was stripped, prepped and wrapped in our bay. No stock photography, no borrowed portfolios — if it is on this page, we did it."
         image={{ src: "/gallery/fleet/02-rh-mechanical-ford-transit-wrap.jpg" }}
         imagePosition="center 60%"

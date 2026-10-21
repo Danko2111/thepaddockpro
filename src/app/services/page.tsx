@@ -25,7 +25,7 @@ export default function ServicesPage() {
     <>
       <PageHero
         breadcrumbs={trail}
-        title="Everything we put on a car"
+        title={<>Everything we put on a <span className="accent">car</span></>}
         lede="Six services, one preparation standard. Every job starts the same way — trim off, paint decontaminated, film chosen for the bodywork in front of us rather than whatever is on the shelf."
         image={{ src: "/gallery/colour-change/01-vw-golf-gti-satin-slate-blue.jpg" }}
         imagePosition="center 70%"

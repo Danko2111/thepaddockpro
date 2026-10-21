@@ -36,7 +36,7 @@ export function MaterialsMarquee() {
                   <span className="font-display text-lg text-chalk">{film.brand}</span>
                   <span className="ml-3 text-sm text-fog">{film.line}</span>
                 </span>
-                <span aria-hidden className="h-5 w-px bg-hairline-strong" />
+                <span aria-hidden className="h-5 w-px bg-cyan/60" />
               </li>
             ))}
           </ul>

@@ -58,7 +58,7 @@ export function PageHero({
                 <li key={crumb.path} className="flex items-center gap-2">
                   {i > 0 && <span aria-hidden className="text-mist/50">/</span>}
                   {i === breadcrumbs.length - 1 ? (
-                    <span aria-current="page" className="text-white">{crumb.name}</span>
+                    <span aria-current="page" className="text-cyan-hot">{crumb.name}</span>
                   ) : (
                     <Link href={crumb.path} className="transition-colors hover:text-white">
                       {crumb.name}
