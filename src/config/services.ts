@@ -28,7 +28,7 @@ export const services: Service[] = [
     tagline: "A new finish, without touching the factory paint.",
     metaTitle: "Vinyl Car Wraps in Langley, BC",
     metaDescription:
-      "Full colour change vinyl wraps in gloss, satin, matte, metallic and color-shift finishes. Installed with 3M 2080, Avery SW900 and Inozetek film over fully disassembled panels.",
+      "Full colour change vinyl wraps in gloss, satin, matte, metallic and colour-shift finishes. Installed with 3M 2080, Avery SW900 and Inozetek film over fully disassembled panels.",
     galleryCategory: "colour-change",
     intro: [
       "A colour change wrap is a cast vinyl film laid over your existing paint. Done properly it reads like a factory finish from three feet away and reverses cleanly years later, which is why it has become the default way to change a car's colour without committing to a respray.",
@@ -38,7 +38,7 @@ export const services: Service[] = [
       { name: "Gloss", detail: "The closest match to factory paint. Shows prep quality more than any other finish, so panels are corrected and decontaminated before film goes on." },
       { name: "Satin & matte", detail: "Low-sheen finishes that flatten reflections and emphasise bodylines. Fingerprint-resistant topcoats on the premium films." },
       { name: "Metallic & pearl", detail: "Flake and pearl films that shift under direct light. Panel sequencing matters — we lay adjacent panels from the same roll to keep flake orientation consistent." },
-      { name: "Color-shift", detail: "Multi-tone films that travel through a colour range with viewing angle. Highest material cost and the least forgiving to install." },
+      { name: "Colour-shift", detail: "Multi-tone films that travel through a colour range with viewing angle. Highest material cost and the least forgiving to install." },
       { name: "Textured", detail: "Carbon fibre, brushed metal and textured films, typically used on roofs, spoilers, mirrors and interior trim rather than full bodies." },
       { name: "Partial wraps", detail: "Roof, hood, spoiler or two-tone treatments when a full change is more than the car needs." },
     ],
@@ -56,7 +56,7 @@ export const services: Service[] = [
       },
       {
         q: "How long does a car wrap last?",
-        a: "Five to seven years is realistic for a garage-kept vehicle on a premium cast film. Cars parked outdoors full time in strong sun sit closer to three to five, and horizontal surfaces — roof, hood, trunk — always age first because they take the most UV. Finish matters too: gloss and satin generally outlast chrome and color-shift films.",
+        a: "Five to seven years is realistic for a garage-kept vehicle on a premium cast film. Cars parked outdoors full time in strong sun sit closer to three to five, and horizontal surfaces — roof, hood, trunk — always age first because they take the most UV. Finish matters too: gloss and satin generally outlast chrome and colour-shift films.",
       },
       {
         q: "Can you wrap over a respray or damaged paint?",
@@ -89,7 +89,7 @@ export const services: Service[] = [
       { name: "Track pack", detail: "Full front plus rocker panels, A-pillars, roof leading edge and rear-arch blast zones — the panels that suffer on track days and long highway miles." },
       { name: "Full body", detail: "Every painted panel. Usually chosen for collectible, high-value or delivery-mileage cars." },
       { name: "High-wear spots", detail: "Door cups, door edges, sill plates, load lip and the fuel filler. Inexpensive, and they cover the damage owners actually notice." },
-      { name: "Matte & colored film", detail: "Satin-finish PPF that converts a gloss car to matte while protecting it, and gloss film over an existing vinyl wrap." },
+      { name: "Matte & coloured film", detail: "Satin-finish PPF that converts a gloss car to matte while protecting it, and gloss film over an existing vinyl wrap." },
     ],
     materials: ["3M Scotchgard Pro Series", "Avery Dennison Supreme Defense"],
     spec: [
@@ -154,11 +154,11 @@ export const services: Service[] = [
       },
       {
         q: "What artwork do you need from us?",
-        a: "Vector artwork is ideal — .ai, .eps or a vector .pdf, with fonts outlined and any brand colors specified as Pantone or CMYK. If all you have is a logo lifted off a website we can usually redraw it, and if you have no artwork at all we can design to your brand from scratch. Send whatever you have and we will tell you what is missing.",
+        a: "Vector artwork is ideal — .ai, .eps or a vector .pdf, with fonts outlined and any brand colours specified as Pantone or CMYK. If all you have is a logo lifted off a website we can usually redraw it, and if you have no artwork at all we can design to your brand from scratch. Send whatever you have and we will tell you what is missing.",
       },
       {
         q: "Can you match our existing fleet?",
-        a: "Yes, and this is exactly why we keep production files. We record the print profile, media, laminate and cut files for every commercial job, so a truck added three years from now prints to the same colour on the same material as the first one. If you are coming from another shop, bring a wrapped vehicle by and we will color-match to it.",
+        a: "Yes, and this is exactly why we keep production files. We record the print profile, media, laminate and cut files for every commercial job, so a truck added three years from now prints to the same colour on the same material as the first one. If you are coming from another shop, bring a wrapped vehicle by and we will colour-match to it.",
       },
       {
         q: "What happens at the end of a lease?",

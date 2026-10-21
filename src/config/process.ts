@@ -182,7 +182,7 @@ export const materials: MaterialBrand[] = [
       "Inozetek built its reputation on gloss depth. Their Super Gloss films read closer to fresh paint than anything else we install — the reflection holds together in a way most wrap film does not. It is a thicker, less forgiving film that demands more time and more skill on curves, and it costs accordingly. On the right car it is worth every hour of it.",
     strengths: [
       "Gloss depth that genuinely reads as paint",
-      "Distinctive colors you will not see on other wraps",
+      "Distinctive colours you will not see on other wraps",
       "Thicker gauge with good self-levelling over minor surface texture",
       "Widely used on show and concours-level builds",
     ],
