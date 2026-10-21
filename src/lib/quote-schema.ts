@@ -8,12 +8,21 @@ export const SERVICE_OPTIONS = [
   { value: "unsure", label: "Not sure yet — advise me" },
 ] as const;
 
-export const TIMELINE_OPTIONS = [
-  { value: "asap", label: "As soon as you can take it" },
-  { value: "month", label: "Within a month" },
-  { value: "quarter", label: "One to three months" },
-  { value: "researching", label: "Just researching for now" },
-] as const;
+/**
+ * Photo uploads. The browser resizes each photo to a JPEG of about 2000px on
+ * the long edge before sending, which lands around 300-600 KB, so these caps
+ * are generous for real use. The total stays under Vercel's 4.5 MB request
+ * limit (and serverActions.bodySizeLimit in next.config.ts) with room for
+ * the rest of the form.
+ */
+export const PHOTO_LIMITS = {
+  maxCount: 6,
+  maxBytesEach: 1_500_000,
+  maxBytesTotal: 3_800_000,
+  /** Long edge, in pixels, that the browser resizes to */
+  maxEdge: 2000,
+  types: ["image/jpeg", "image/png", "image/webp"],
+} as const;
 
 export const quoteSchema = z.object({
   name: z.string().trim().min(2, "Please tell us your name.").max(80),
@@ -33,8 +42,6 @@ export const quoteSchema = z.object({
 
   vehicle: z.string().trim().min(2, "Year, make and model helps us quote accurately.").max(140),
   vehicleCount: z.coerce.number().int().min(1).max(500).optional().default(1),
-
-  timeline: z.enum(TIMELINE_OPTIONS.map((o) => o.value) as [string, ...string[]]).optional().default("researching"),
 
   message: z
     .string()
@@ -57,11 +64,8 @@ export type QuoteState = {
   status: "idle" | "success" | "error";
   message?: string;
   /** Field-level errors keyed by field name. */
-  errors?: Partial<Record<keyof QuoteInput | "form", string[]>>;
+  errors?: Partial<Record<keyof QuoteInput | "photos" | "form", string[]>>;
 };
 
 export const serviceLabel = (value: string) =>
   SERVICE_OPTIONS.find((o) => o.value === value)?.label ?? value;
-
-export const timelineLabel = (value: string) =>
-  TIMELINE_OPTIONS.find((o) => o.value === value)?.label ?? value;

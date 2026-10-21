@@ -1,5 +1,5 @@
 import { site } from "@/config/site";
-import { serviceLabel, timelineLabel, type QuoteInput } from "./quote-schema";
+import { serviceLabel, type QuoteInput } from "./quote-schema";
 
 const esc = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -39,7 +39,7 @@ function row(label: string, value: string) {
 }
 
 /** Notification sent to the shop. reply-to is set to the customer. */
-export function shopNotification(data: QuoteInput) {
+export function shopNotification(data: QuoteInput, photoCount = 0) {
   const rows = [
     row("Name", esc(data.name)),
     data.company ? row("Company", esc(data.company)) : "",
@@ -48,7 +48,7 @@ export function shopNotification(data: QuoteInput) {
     row("Services", data.services.map((s) => esc(serviceLabel(s))).join("<br>")),
     row("Vehicle", esc(data.vehicle)),
     data.vehicleCount > 1 ? row("Vehicle count", String(data.vehicleCount)) : "",
-    row("Timeline", esc(timelineLabel(data.timeline))),
+    row("Photos", photoCount ? `${photoCount} attached` : "None sent"),
     data.referral ? row("Heard about us via", esc(data.referral)) : "",
     row("Details", nl2br(data.message)),
   ]
@@ -73,7 +73,7 @@ export function shopNotification(data: QuoteInput) {
     `Services: ${data.services.map(serviceLabel).join(", ")}`,
     `Vehicle: ${data.vehicle}`,
     data.vehicleCount > 1 && `Vehicle count: ${data.vehicleCount}`,
-    `Timeline: ${timelineLabel(data.timeline)}`,
+    `Photos: ${photoCount ? `${photoCount} attached` : "none sent"}`,
     data.referral && `Heard via: ${data.referral}`,
     "",
     "Details:",
@@ -86,7 +86,10 @@ export function shopNotification(data: QuoteInput) {
 }
 
 /** Confirmation sent back to the customer so the enquiry doesn't feel like a void. */
-export function customerConfirmation(data: QuoteInput) {
+export function customerConfirmation(data: QuoteInput, photoCount = 0) {
+  const photoLine = photoCount
+    ? `${photoCount} photo${photoCount === 1 ? "" : "s"} attached`
+    : "No photos yet";
   const subject = `We've got your enquiry — ${site.name}`;
 
   const html = shell(
@@ -94,18 +97,22 @@ export function customerConfirmation(data: QuoteInput) {
     `<p style="margin:0 0 16px;font-size:15px;line-height:1.65;">
        Your enquiry is in and a real person will read it. We normally reply within one business day.
      </p>
-     <p style="margin:0 0 16px;font-size:15px;line-height:1.65;">
+     ${
+       photoCount
+         ? ""
+         : `<p style="margin:0 0 16px;font-size:15px;line-height:1.65;">
        <strong>Speed this up:</strong> reply to this email with a few photos of the vehicle — a three-quarter
        front, a straight side, and close-ups of any existing damage or previous paintwork. Photos are the
        difference between a rough range and a firm number.
-     </p>
+     </p>`
+     }
      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:22px 0;background:#fafafa;border:1px solid #e4e4e7;">
        <tr><td style="padding:16px 18px;">
          <p style="margin:0 0 6px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#71717a;">What you sent</p>
          <p style="margin:0;font-size:14px;line-height:1.6;">
            <strong>${esc(data.vehicle)}</strong><br>
            ${data.services.map((s) => esc(serviceLabel(s))).join(" · ")}<br>
-           ${esc(timelineLabel(data.timeline))}
+           ${photoLine}
          </p>
        </td></tr>
      </table>
@@ -120,12 +127,16 @@ export function customerConfirmation(data: QuoteInput) {
     "",
     "A real person will read it and we normally reply within one business day.",
     "",
-    "Speed this up: reply to this email with photos of the vehicle — a three-quarter front,",
-    "a straight side, and close-ups of any damage or previous paintwork.",
-    "",
+    ...(photoCount
+      ? []
+      : [
+          "Speed this up: reply to this email with photos of the vehicle — a three-quarter front,",
+          "a straight side, and close-ups of any damage or previous paintwork.",
+          "",
+        ]),
     `What you sent: ${data.vehicle}`,
     `Services: ${data.services.map(serviceLabel).join(", ")}`,
-    `Timeline: ${timelineLabel(data.timeline)}`,
+    photoLine,
     "",
     `In a hurry? Call ${site.phone}.`,
     "",

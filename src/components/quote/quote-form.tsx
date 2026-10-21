@@ -3,19 +3,20 @@
 import { useActionState, useEffect, useId, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitQuote } from "@/app/contact/actions";
-import { SERVICE_OPTIONS, TIMELINE_OPTIONS, type QuoteState } from "@/lib/quote-schema";
+import { SERVICE_OPTIONS, type QuoteState } from "@/lib/quote-schema";
 import { site } from "@/config/site";
 import { cn } from "@/lib/cn";
+import { PhotoField, type Photo } from "./photo-field";
 
 const initialState: QuoteState = { status: "idle" };
 
 const fieldBase =
-  "w-full border border-hairline bg-steel px-4 py-3.5 text-[0.95rem] text-chalk placeholder:text-fog-dim " +
-  "transition-colors focus:border-cyan focus:outline-none";
+  "w-full rounded-xl border border-white/15 bg-navy-2 px-4 py-3.5 text-[0.95rem] text-white placeholder:text-fog-dim " +
+  "transition-colors hover:border-white/30 focus:border-cyan-hot focus:outline-none";
 
 function Label({ htmlFor, children, optional }: { htmlFor: string; children: React.ReactNode; optional?: boolean }) {
   return (
-    <label htmlFor={htmlFor} className="mb-2.5 flex items-baseline gap-2 text-sm font-medium text-fog">
+    <label htmlFor={htmlFor} className="mb-2.5 flex items-baseline gap-2 text-sm font-semibold text-haze">
       {children}
       {optional && <span className="text-fog-dim">optional</span>}
     </label>
@@ -37,7 +38,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center justify-center bg-cyan px-8 py-5 text-[0.95rem] font-semibold leading-none text-cyan-ink transition-colors hover:bg-cyan-hot disabled:cursor-wait disabled:opacity-60"
+      className="btn btn-light px-8 py-5"
     >
       {pending ? "Sending…" : "Send quote request"}
     </button>
@@ -47,6 +48,7 @@ function SubmitButton() {
 export function QuoteForm() {
   const [state, formAction] = useActionState(submitQuote, initialState);
   const [fleetSelected, setFleetSelected] = useState(false);
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const renderedAt = useRef<HTMLInputElement>(null);
   const headingId = useId();
   const statusRef = useRef<HTMLDivElement>(null);
@@ -60,29 +62,42 @@ export function QuoteForm() {
     if (state.status !== "idle") statusRef.current?.focus();
   }, [state]);
 
+  // Send the resized copies the photo field holds, never the originals
+  function submit(formData: FormData) {
+    formData.delete("photos");
+    for (const photo of photos) formData.append("photos", photo.file, photo.file.name);
+    return formAction(formData);
+  }
+
   if (state.status === "success") {
     return (
       <div
         ref={statusRef}
         tabIndex={-1}
-        className="border border-hairline bg-steel p-10 focus:outline-none sm:p-14"
+        className="rounded-2xl border border-white/10 bg-navy-2 p-10 focus:outline-none sm:p-14"
       >
-        <div className="lightline mb-8 h-0.5 w-24" aria-hidden />
-        <h2 className="text-3xl text-chalk sm:text-4xl">
+        <h2 className="text-3xl text-white sm:text-4xl">
           Request received
         </h2>
         <p className="mt-5 max-w-lg text-lg leading-relaxed text-fog">
           A confirmation is on its way to your inbox. A real person reads every enquiry and we normally
           come back within one business day.
         </p>
-        <p className="mt-5 max-w-lg leading-relaxed text-fog">
-          <span className="text-chalk">Speed things up:</span> reply to that confirmation with photos of
-          the vehicle — a three-quarter front, a straight side, and close-ups of any damage or previous
-          paintwork. Photos are the difference between a rough range and a firm number.
-        </p>
+        {photos.length > 0 ? (
+          <p className="mt-5 max-w-lg leading-relaxed text-fog">
+            We have your {photos.length === 1 ? "photo" : `${photos.length} photos`} too, so the first
+            number we send should be close to the final one.
+          </p>
+        ) : (
+          <p className="mt-5 max-w-lg leading-relaxed text-fog">
+            <span className="font-semibold text-white">Speed things up:</span> reply to that confirmation
+            with photos of the vehicle — a three-quarter front, a straight side, and close-ups of any damage
+            or previous paintwork. Photos are the difference between a rough range and a firm number.
+          </p>
+        )}
         <p className="mt-8 text-sm text-fog-dim">
           In a hurry?{" "}
-          <a href={site.phoneHref} className="text-cyan hover:text-cyan-hot">
+          <a href={site.phoneHref} className="text-link text-white">
             Call {site.phone}
           </a>
         </p>
@@ -91,7 +106,7 @@ export function QuoteForm() {
   }
 
   return (
-    <form action={formAction} noValidate className="space-y-8" aria-labelledby={headingId}>
+    <form action={submit} noValidate className="space-y-8" aria-labelledby={headingId}>
       <h2 id={headingId} className="sr-only">
         Quote request form
       </h2>
@@ -101,7 +116,7 @@ export function QuoteForm() {
           ref={statusRef}
           tabIndex={-1}
           role="alert"
-          className="border-l-2 border-cyan bg-steel p-5 text-sm leading-relaxed text-chalk focus:outline-none"
+          className="rounded-xl border border-cyan-hot/50 bg-navy-2 p-5 text-sm leading-relaxed text-white focus:outline-none"
         >
           {state.message}
         </div>
@@ -116,7 +131,7 @@ export function QuoteForm() {
 
       {/* ── Contact ───────────────────────────────────────────────────────── */}
       <fieldset className="space-y-6">
-        <legend className="mb-6 text-lg text-chalk">Who you are</legend>
+        <legend className="mb-6 text-xl font-bold tracking-[-0.02em] text-white">Who you are</legend>
 
         <div className="grid gap-6 sm:grid-cols-2">
           <div>
@@ -165,25 +180,25 @@ export function QuoteForm() {
       </fieldset>
 
       {/* ── Job ───────────────────────────────────────────────────────────── */}
-      <fieldset className="space-y-6 border-t border-hairline pt-8">
-        <legend className="mb-6 text-lg text-chalk">What you want done</legend>
+      <fieldset className="space-y-6 border-t border-white/10 pt-8">
+        <legend className="mb-6 text-xl font-bold tracking-[-0.02em] text-white">What you want done</legend>
 
         <div>
-          <span className="mb-3 block text-sm font-medium text-fog">
+          <span className="mb-3 block text-sm font-semibold text-haze">
             Service — pick all that apply
           </span>
-          <div className="grid gap-px border border-hairline bg-hairline sm:grid-cols-2">
+          <div className="grid gap-2 sm:grid-cols-2">
             {SERVICE_OPTIONS.map((option) => (
               <label
                 key={option.value}
-                className="flex cursor-pointer items-center gap-3 bg-steel px-4 py-4 text-sm text-chalk transition-colors hover:bg-steel-2 has-checked:bg-steel-2"
+                className="flex cursor-pointer items-center gap-3 rounded-xl border border-white/15 bg-navy-2 px-4 py-4 text-sm text-white transition-colors hover:border-white/30 has-checked:border-cyan-hot has-checked:bg-navy-3"
               >
                 <input
                   type="checkbox"
                   name="services"
                   value={option.value}
                   onChange={(e) => option.value === "fleet" && setFleetSelected(e.currentTarget.checked)}
-                  className="h-4 w-4 shrink-0 accent-[var(--color-cyan)]"
+                  className="h-4 w-4 shrink-0 accent-[var(--color-cyan-hot)]"
                 />
                 {option.label}
               </label>
@@ -220,17 +235,6 @@ export function QuoteForm() {
         </div>
 
         <div>
-          <Label htmlFor="timeline">Timeline</Label>
-          <select id="timeline" name="timeline" defaultValue="month" className={cn(fieldBase, "appearance-none")}>
-            {TIMELINE_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value} className="bg-steel">
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
           <Label htmlFor="message">Details</Label>
           <textarea
             id="message" name="message" required rows={6}
@@ -242,6 +246,8 @@ export function QuoteForm() {
           <FieldError id="err-message" errors={state.errors?.message} />
         </div>
 
+        <PhotoField photos={photos} onChange={setPhotos} serverError={state.errors?.photos?.[0]} />
+
         <div>
           <Label htmlFor="referral" optional>How did you hear about us</Label>
           <input
@@ -252,7 +258,7 @@ export function QuoteForm() {
         </div>
       </fieldset>
 
-      <div className="flex flex-wrap items-center gap-6 border-t border-hairline pt-8">
+      <div className="flex flex-wrap items-center gap-6 border-t border-white/10 pt-8">
         <SubmitButton />
         <p className="max-w-xs text-xs leading-relaxed text-fog-dim">
           We use your details to answer this enquiry and nothing else. No lists, no resale.

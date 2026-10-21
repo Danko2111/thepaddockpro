@@ -3,6 +3,15 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
 
+  experimental: {
+    serverActions: {
+      // Quote form photos: up to 3.8 MB after the browser resizes them (see
+      // PHOTO_LIMITS), plus the text fields and multipart overhead. Stays
+      // under Vercel's 4.5 MB request cap.
+      bodySizeLimit: "4mb",
+    },
+  },
+
   /**
    * paddockpro.ca previously hosted a site built by another company. Whatever
    * of it Google still has indexed will 404 on launch unless it is redirected,
